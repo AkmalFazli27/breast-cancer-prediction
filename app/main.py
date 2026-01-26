@@ -30,6 +30,19 @@ def add_sidebar():
     
     return input_dict
 
+def get_scaled_values(input_dict):
+    data = get_clean_data().drop(['diagnosis'], axis=1)
+
+    scaled_dict = {}
+    
+    for key, value in input_dict.items():
+        max_val = data[key].max()
+        min_val = data[key].min()
+        scaled_value = (value - min_val) / (max_val - min_val)
+        scaled_dict[key] = scaled_value
+    
+    return scaled_dict
+
 def get_radar_chart(input_data):
     input_keys = list(input_data.keys())
 
@@ -69,7 +82,7 @@ def get_radar_chart(input_data):
                 visible=True,
                 range=[0, 5]
             )),
-        showlegend=False
+        showlegend=True
     )
 
     return fig
