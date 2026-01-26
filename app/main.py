@@ -20,8 +20,9 @@ def add_sidebar():
     for label, key in slider_labels:
         st.sidebar.slider(
             label,
-            min_value=0,
-            max_value=100
+            min_value=0.0,
+            max_value=float(data[key].max() * 1.2),
+            value=float(data[key].mean())
         )
 
 def main():
