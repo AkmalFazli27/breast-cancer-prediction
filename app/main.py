@@ -9,6 +9,20 @@ def get_clean_data():
 
 def add_sidebar():
     st.sidebar.header("Cell Nuclei Measurements")
+    data = get_clean_data()
+
+    slider_labels = []
+    for col in data.columns:
+        if col != 'diagnosis':
+            label = col.replace('_', ' ').title()
+            slider_labels.append((label, col))
+    
+    for label, key in slider_labels:
+        st.sidebar.slider(
+            label,
+            min_value=0,
+            max_value=100
+        )
 
 def main():
     st.set_page_config(
