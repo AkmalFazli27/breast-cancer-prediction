@@ -31,17 +31,23 @@ def add_sidebar():
     return input_dict
 
 def get_radar_chart(input_data):
-    categories = ['processing cost','mechanical properties','chemical stability',
-              'thermal stability', 'device integration']
+    input_keys = list(input_data.keys())
+
+    categories_mean = [key for key in input_keys if 'mean' in key]
+    categories_se = [key for key in input_keys if 'se' in key]
+    categories_worst = [key for key in input_keys if 'worst' in key]
 
     fig = go.Figure()
 
+    # Mean values
     fig.add_trace(go.Scatterpolar(
-        r=[1, 5, 2, 2, 3],
-        theta=categories,
+        r=[input_data[key] for key in categories_mean],
+        theta=[key.replace('_mean', '').replace('_', ' ').title() for key in categories_mean],
         fill='toself',
-        name='Product A'
+        name='Mean Value'
     ))
+
+    # SE values
     fig.add_trace(go.Scatterpolar(
         r=[4, 3, 2.5, 1, 2],
         theta=categories,
