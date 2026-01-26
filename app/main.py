@@ -44,45 +44,65 @@ def get_scaled_values(input_dict):
     return scaled_dict
 
 def get_radar_chart(input_data):
-    input_keys = list(input_data.keys())
+    input_data = get_scaled_values(input_data)
 
-    categories_mean = [key for key in input_keys if 'mean' in key]
-    categories_se = [key for key in input_keys if 'se' in key]
-    categories_worst = [key for key in input_keys if 'worst' in key]
+    ordered_bases = ['concavity', 'area', 'symmetry', 'concave points', 'texture', 'compactness', 
+                     'smoothness', 'fractal_dimension']
+
+
+    def get_trace_data(suffix, data, bases):
+        r_values = []
+        theta_values = []
+        
+        for base in bases:
+            key = f"{base}_{suffix}" 
+            
+            if key in data:
+                r_values.append(data[key])
+                label = base.replace('_', ' ').title()
+                theta_values.append(label)
+        if r_values:
+            r_values.append(r_values[0])
+            theta_values.append(theta_values[0])
+
+        return r_values, theta_values
+
+    r_mean, theta_mean   = get_trace_data('mean', input_data, ordered_bases)
+    r_se, theta_se       = get_trace_data('se', input_data, ordered_bases)
+    r_worst, theta_worst = get_trace_data('worst', input_data, ordered_bases)
 
     fig = go.Figure()
 
     # Mean values
-    fig.add_trace(go.Scatterpolar(
-        r=[input_data[key] for key in categories_mean],
-        theta=[key.replace('_mean', '').replace('_', ' ').title() for key in categories_mean],
-        fill='toself',
-        name='Mean Value'
-    ))
+    if r_mean:
+        fig.add_trace(go.Scatterpolar(
+            r=r_mean, theta=theta_mean,
+            fill='toself', name='Mean Value',
+            line=dict(color='blue',)
+        ))
 
     # SE values
-    fig.add_trace(go.Scatterpolar(
-        r=[input_data[key] for key in categories_se],
-        theta=[key.replace('_se', '').replace('_', ' ').title() for key in categories_se],
-        fill='toself',
-        name='Standard Error Value'
-    ))
+    if r_se:
+        fig.add_trace(go.Scatterpolar(
+            r=r_se, theta=theta_se,
+            fill='toself', name='Standard Error',
+            line=dict(color='orange')
+        ))
 
     # Worst values
-    fig.add_trace(go.Scatterpolar(
-        r=[input_data[key] for key in categories_worst],
-        theta=[key.replace('_worst', '').replace('_', ' ').title() for key in categories_worst],
-        fill='toself',
-        name='Worst Value'
-    ))
+    if r_worst:
+        fig.add_trace(go.Scatterpolar(
+            r=r_worst, theta=theta_worst,
+            fill='toself', name='Worst Value',
+            line=dict(color='red')
+        ))
 
     fig.update_layout(
         polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 5]
-            )),
-        showlegend=True
+            radialaxis=dict(visible=True, range=[0, 1])
+        ),
+        showlegend=True,
+        margin=dict(l=80, r=80, t=50, b=50)
     )
 
     return fig
