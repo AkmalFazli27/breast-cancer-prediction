@@ -49,10 +49,18 @@ def get_radar_chart(input_data):
 
     # SE values
     fig.add_trace(go.Scatterpolar(
-        r=[4, 3, 2.5, 1, 2],
-        theta=categories,
+        r=[input_data[key] for key in categories_se],
+        theta=[key.replace('_se', '').replace('_', ' ').title() for key in categories_se],
         fill='toself',
-        name='Product B'
+        name='Standard Error Value'
+    ))
+
+    # Worst values
+    fig.add_trace(go.Scatterpolar(
+        r=[input_data[key] for key in categories_worst],
+        theta=[key.replace('_worst', '').replace('_', ' ').title() for key in categories_worst],
+        fill='toself',
+        name='Worst Value'
     ))
 
     fig.update_layout(
