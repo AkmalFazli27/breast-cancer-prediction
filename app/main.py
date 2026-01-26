@@ -17,13 +17,17 @@ def add_sidebar():
             label = col.replace('_', ' ').title()
             slider_labels.append((label, col))
     
+    input_dict = {}
+    
     for label, key in slider_labels:
-        st.sidebar.slider(
+        input_dict[key] = st.sidebar.slider(
             label,
             min_value=0.0,
             max_value=float(data[key].max() * 1.2),
             value=float(data[key].mean())
         )
+    
+    return input_dict
 
 def main():
     st.set_page_config(
@@ -33,7 +37,7 @@ def main():
         initial_sidebar_state="expanded"
     )
 
-    add_sidebar()
+    input_data = add_sidebar()
 
     with st.container():
         st.title("Breast Cancer Predictor")
