@@ -2,6 +2,11 @@ import streamlit as st
 import pickle as pickle
 import pandas as pd
 
+def get_clean_data():
+    data = pd.read_csv("D:\\Ameng\\Data Science Project\\breast-cancer-prediciton\\data\\processed\\removed_multicollinearity.csv")
+    data = data.drop(['id'], axis=1)
+    return data
+
 def add_sidebar():
     st.sidebar.header("Cell Nuclei Measurements")
 
