@@ -1,7 +1,8 @@
 import streamlit as st
-import pickle as pickle
+import joblib
 import pandas as pd
 import plotly.graph_objects as go
+import numpy as np
 
 def get_clean_data():
     data = pd.read_csv("D:\\Ameng\\Data Science Project\\breast-cancer-prediciton\\data\\processed\\removed_multicollinearity.csv")
@@ -107,6 +108,14 @@ def get_radar_chart(input_data):
 
     return fig
 
+def add_prediction(input_data):
+    model = joblib.load('models/final_model_random_forest.pkl')
+    slice = joblib.load('models/scaler.pkl')
+
+    input_array = np.array(list(input_data.values())).reshape(1, -1)
+
+    st.write(input_array)
+
 def main():
     st.set_page_config(
         page_title="Breast Cancer Predictor",
@@ -134,7 +143,7 @@ def main():
         st.plotly_chart(radar_chart)
 
     with col2:
-        st.write("this is col2")
+        add_prediction(input_data)
 
 if __name__ == '__main__':
     main()
