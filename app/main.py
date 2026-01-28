@@ -116,8 +116,16 @@ def add_prediction(input_data):
     input_array_scaled = scaler.transform(input_array)
 
     prediction = model.predict(input_array_scaled)
+    benign_proba = model.predict_proba(input_array_scaled)[0][0] * 100
+    malignant_proba = model.predict_proba(input_array_scaled)[0][1] * 100
 
-    st.write(prediction)
+    if prediction[0] == 0:
+        st.write("Benign")
+    else:
+        st.write("Malignant")
+
+    st.write(f"Probability of being benign: **{round(benign_proba,2)} %**")
+    st.write(f"Probability of being malignant: **{round(malignant_proba,2)} %**")
 
 def main():
     st.set_page_config(
@@ -139,6 +147,15 @@ def main():
             to get a prediction.
             """)
     
+        st.warning(
+            """
+            ⚠️ **Disclaimer:** This application is intended for educational and informational 
+            purposes only. It should NOT be used as a substitute for professional medical 
+            diagnosis, advice, or treatment. Always consult a qualified healthcare provider 
+            for proper diagnosis and treatment decisions.
+            """
+        )
+
     col1, col2 = st.columns([4,1])
 
     with col1:
