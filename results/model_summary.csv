@@ -1,2 +1,2 @@
 Best Model,Best Parameters,Final Test Accuracy,Final Test Precision,Final Test Recall,Final Test F1-Score,Final Test ROC-AUC,Training Samples,Test Samples,Number of Features,True Negatives,False Positives,False Negatives,True Positives
-Random Forest,"{'max_depth': 10, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 200}",0.9649122807017544,1.0,0.9047619047619048,0.95,0.9973544973544973,455,114,22,72,0,4,38
+Logistic Regression,"{'C': 10, 'class_weight': None, 'penalty': 'l2', 'solver': 'liblinear'}",0.9736842105263158,0.975609756097561,0.9523809523809523,0.963855421686747,0.9904100529100529,455,114,22,71,1,2,40
