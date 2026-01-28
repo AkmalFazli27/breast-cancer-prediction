@@ -109,12 +109,15 @@ def get_radar_chart(input_data):
     return fig
 
 def add_prediction(input_data):
-    model = joblib.load('models/final_model_random_forest.pkl')
-    slice = joblib.load('models/scaler.pkl')
+    model = joblib.load('models/final_model_logistic_regression.pkl')
+    scaler = joblib.load('models/scaler.pkl')
 
     input_array = np.array(list(input_data.values())).reshape(1, -1)
+    input_array_scaled = scaler.transform(input_array)
 
-    st.write(input_array)
+    prediction = model.predict(input_array_scaled)
+
+    st.write(prediction)
 
 def main():
     st.set_page_config(
