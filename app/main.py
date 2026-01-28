@@ -50,7 +50,6 @@ def get_radar_chart(input_data):
     ordered_bases = ['concavity', 'area', 'symmetry', 'concave points', 'texture', 'compactness', 
                      'smoothness', 'fractal_dimension']
 
-
     def get_trace_data(suffix, data, bases):
         r_values = []
         theta_values = []
@@ -119,16 +118,18 @@ def add_prediction(input_data):
     benign_proba = model.predict_proba(input_array_scaled)[0][0] * 100
     malignant_proba = model.predict_proba(input_array_scaled)[0][1] * 100
 
-    st.subheader("Cell Cluster Predction")
+    st.subheader("Cell Cluster Prediction")
     st.write("The cell cluster is:")
 
     if prediction[0] == 0:
-        st.write("Benign")
+        st.success("**Benign**")
     else:
-        st.write("Malignant")
+        st.error("**Malignant**")
 
-    st.write(f"Probability of being benign: **{round(benign_proba,2)} %**")
-    st.write(f"Probability of being malignant: **{round(malignant_proba,2)} %**")
+    st.divider()
+    
+    st.metric(label="Probability of Benign", value=f"{round(benign_proba, 2)}%")
+    st.metric(label="Probability of Malignant", value=f"{round(malignant_proba, 2)}%")
 
 def main():
     st.set_page_config(
