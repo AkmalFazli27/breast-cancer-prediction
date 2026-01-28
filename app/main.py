@@ -119,6 +119,9 @@ def add_prediction(input_data):
     benign_proba = model.predict_proba(input_array_scaled)[0][0] * 100
     malignant_proba = model.predict_proba(input_array_scaled)[0][1] * 100
 
+    st.subheader("Cell Cluster Predction")
+    st.write("The cell cluster is:")
+
     if prediction[0] == 0:
         st.write("Benign")
     else:
