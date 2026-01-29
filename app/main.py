@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import numpy as np
 
 def get_clean_data():
-    data = pd.read_csv("D:\\Ameng\\Data Science Project\\breast-cancer-prediciton\\data\\processed\\removed_multicollinearity.csv")
+    data = pd.read_csv('data/processed/removed_multicollinearity.csv')
     data = data.drop(['id'], axis=1)
     return data
 
