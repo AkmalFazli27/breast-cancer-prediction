@@ -7,6 +7,8 @@
 
 A machine learning web application for predicting whether a breast mass is **Benign** or **Malignant** based on measurements from digitized images of fine needle aspirate (FNA) of breast masses.
 
+🔗 **Live Demo:** [breast-cancer-predictor-project.streamlit.app](https://breast-cancer-predictor-project.streamlit.app/)
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
