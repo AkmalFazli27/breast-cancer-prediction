@@ -136,29 +136,55 @@
   border: 1px solid var(--color-rule);
 }
 
-/* Focused field underline — the input is a paper field with a single rule */
-.field {
+/* The slider — a paper track with a square hematoxylin thumb */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
   background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--color-rule-ink);
+  cursor: pointer;
+}
+.slider:focus-visible {
+  outline: 2px solid var(--color-hematoxylin);
+  outline-offset: 3px;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--color-rule-ink);
+}
+.slider::-moz-range-track {
+  height: 2px;
+  background: var(--color-rule-ink);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -8px;
+  background: var(--color-hematoxylin);
+  border: 2px solid var(--color-paper);
   border-radius: 0;
-  color: var(--color-ink);
-  font-family: var(--font-notation);
-  font-size: 0.9375rem;
-  padding: 0.35rem 0;
-  width: 100%;
-  transition: border-color 0.15s ease;
+  box-shadow: 0 0 0 1px var(--color-hematoxylin);
+  transition: background 0.15s ease;
 }
-.field::placeholder {
-  color: var(--color-faded);
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--color-hematoxylin);
+  border: 2px solid var(--color-paper);
+  border-radius: 0;
+  box-shadow: 0 0 0 1px var(--color-hematoxylin);
+  transition: background 0.15s ease;
 }
-.field:focus {
-  outline: none;
-  border-bottom-color: var(--color-hematoxylin);
-  border-bottom-width: 2px;
+.slider:hover::-webkit-slider-thumb,
+.slider:hover::-moz-range-thumb {
+  background: var(--color-hematoxylin-deep);
 }
-.field[aria-invalid="true"] {
-  border-bottom-color: var(--color-carmine);
+.slider:disabled::-webkit-slider-thumb,
+.slider:disabled::-moz-range-thumb {
+  background: var(--color-faded);
+  cursor: not-allowed;
 }
 
 /* The single authored motion, paper-native */

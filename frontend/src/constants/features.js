@@ -9,6 +9,8 @@
  * scales every feature to [0,1] against (value - min) / (max - min).
  */
 
+import { roundStep, sensibleStep } from '../utils/scaling'
+
 const QUALIFIERS = {
   mean: {
     label: 'Mean',
@@ -101,9 +103,12 @@ export const FEATURE_GROUPS = [
 
 export const FEATURE_KEYS = FEATURE_META.map((f) => f.key)
 
-/** Default form values — the dataset means, so the app returns a meaningful verdict out of the box. */
+/** Default form values — the dataset means, snapped to each slider's step. */
 export const DEFAULT_VALUES = Object.fromEntries(
-  FEATURE_META.map((f) => [f.key, f.mean]),
+  FEATURE_META.map((f) => [
+    f.key,
+    roundStep(f.mean, sensibleStep(f.min, f.max), f.min),
+  ]),
 )
 
 /** Radar axis ordering — the legacy ordering: base then mean/SE/worst. */

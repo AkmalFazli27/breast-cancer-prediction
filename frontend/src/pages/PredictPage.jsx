@@ -60,7 +60,6 @@ export default function PredictPage() {
     mode: 'onTouched',
   })
   const { watch, handleSubmit, reset, formState } = methods
-  const { errors } = formState
   const { result, loading, error, runPrediction, resetResult, isDemoMode } = usePrediction()
   const [showReset, setShowReset] = useState(false)
 
@@ -121,7 +120,7 @@ export default function PredictPage() {
               <div className="flex flex-wrap items-center gap-4 border-t border-rule pt-5">
                 <button
                   type="submit"
-                  disabled={loading || Object.keys(errors).length > 0}
+                  disabled={loading}
                   className="inline-flex items-center gap-2 border border-hematoxylin bg-hematoxylin px-6 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-hematoxylin-deep disabled:cursor-not-allowed disabled:bg-stock disabled:text-faded disabled:border-rule-ink"
                 >
                   {loading && <Loader2 className="size-4 animate-spin" strokeWidth={1.75} aria-hidden />}
@@ -136,9 +135,6 @@ export default function PredictPage() {
                   <RotateCcw className="size-4" strokeWidth={1.75} aria-hidden />
                   Reset to means
                 </button>
-                <span className="ml-auto small-notation text-faded">
-                  {`${Object.keys(errors).length} of ${22} fields invalid`}
-                </span>
               </div>
             </div>
 

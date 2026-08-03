@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { Info } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
+import { roundStep, sensibleStep } from '../utils/scaling'
 
-/** A single labeled numeric input for one model feature, with inline validation and a tooltip. */
+/**
+ * A single labeled slider for one model feature, bounded by the dataset's
+ * observed min-max, prefilled at the dataset mean, with a mono value readout
+ * and a tooltip explaining the measurement.
+ */
 export default function FeatureInput({ meta }) {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext()
+  const { register, watch } = useFormContext()
   const [showTip, setShowTip] = useState(false)
-  const error = errors?.[meta.key]
+  const step = sensibleStep(meta.min, meta.max)
+  const current = roundStep(Number(watch(meta.key)), step, meta.min)
 
   return (
     <div className="relative">
@@ -32,16 +35,30 @@ export default function FeatureInput({ meta }) {
         </button>
       </label>
 
-      <input
-        id={meta.key}
-        type="text"
-        inputMode="decimal"
-        autoComplete="off"
-        className="field mt-1"
-        aria-invalid={Boolean(error)}
-        aria-describedby={error ? `err-${meta.key}` : `tip-${meta.key}`}
-        {...register(meta.key, { valueAsNumber: false })}
-      />
+      <div className="mt-1.5 flex items-center gap-3">
+        <input
+          id={meta.key}
+          type="range"
+          min={meta.min}
+          max={meta.max}
+          step={step}
+          className="slider flex-1"
+          aria-label={meta.key}
+          {...register(meta.key, { valueAsNumber: true })}
+        />
+        <output
+          htmlFor={meta.key}
+          className="notation w-16 shrink-0 text-right text-ink"
+          aria-live="polite"
+        >
+          {current}
+        </output>
+      </div>
+
+      <div className="mt-1 flex justify-between small-notation text-faded">
+        <span>{meta.min}</span>
+        <span>{meta.max}</span>
+      </div>
 
       {showTip && (
         <span
@@ -50,16 +67,6 @@ export default function FeatureInput({ meta }) {
           className="absolute right-0 top-full z-20 mt-1 w-56 border border-rule-ink bg-paper px-3 py-2 text-xs leading-relaxed text-ink shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
         >
           {meta.tooltip}
-        </span>
-      )}
-
-      {error && (
-        <span
-          id={`err-${meta.key}`}
-          role="alert"
-          className="mt-1 block text-xs text-carmine"
-        >
-          {error.message}
         </span>
       )}
     </div>
