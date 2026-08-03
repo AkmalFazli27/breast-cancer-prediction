@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts'
-import { FEATURE_META, RADAR_BASES, radarBaseLabel } from '../constants/features'
+import { FEATURE_META, RADAR_BASES } from '../constants/features'
 import { buildRadarData } from '../utils/scaling'
 
 const TRACES = [
