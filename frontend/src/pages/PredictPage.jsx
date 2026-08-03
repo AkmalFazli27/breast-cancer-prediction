@@ -80,7 +80,7 @@ export default function PredictPage() {
   return (
     <main className="mx-auto max-w-6xl px-5 py-10">
       <div className="paper-in">
-        <p className="small-notation text-faded uppercase tracking-[0.18em]">
+        <p className="small-notation text-faded tracking-[0.18em]">
           Instrument — {FEATURE_GROUPS.length} measurement groups
         </p>
         <h1 className="mt-3 font-display text-4xl leading-tight tracking-tight text-ink md:text-5xl">
@@ -99,7 +99,7 @@ export default function PredictPage() {
           className="mt-6 flex items-start gap-3 border border-faded bg-stock px-4 py-3"
         >
           <AlertTriangle className="mt-0.5 size-4 shrink-0 text-faded" strokeWidth={1.75} aria-hidden />
-          <p className="text-sm leading-relaxed text-ink-soft">
+          <p className="measure text-sm leading-relaxed text-ink-soft">
             No prediction API configured — running on a <strong>synthetic demo model</strong>{' '}
             derived from the published feature importances, clearly not the real pipeline.
             Point <span className="notation">VITE_API_BASE_URL</span> at the FastAPI backend
@@ -158,7 +158,7 @@ export default function PredictPage() {
               </FigurePlate>
 
               <div className="border border-rule-ink bg-stock px-4 py-3">
-                <p className="small-notation text-faded uppercase tracking-widest">Disclaimer</p>
+                <p className="small-notation text-faded tracking-widest">Disclaimer</p>
                 <p className="mt-1 text-xs leading-relaxed text-ink-soft">
                   Educational use only. Not a substitute for professional medical advice,
                   diagnosis, or treatment.

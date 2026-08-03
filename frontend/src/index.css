@@ -68,9 +68,11 @@
     outline-offset: 3px;
   }
 
-  /* The Measure Rule: prose never exceeds 75ch */
+  /* The Measure Rule: prose never exceeds ~75 average characters.
+     Expressed in ems, not ch: Inter's "0" glyph is ~0.63em wide, so a
+     ch-based 75ch would render ~95 average characters per line. */
   .measure {
-    max-width: 75ch;
+    max-width: 38em;
   }
 }
 

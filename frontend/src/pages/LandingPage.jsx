@@ -59,7 +59,7 @@ export default function LandingPage() {
       {/* Abstract — the paper's front matter */}
       <section className="mx-auto grid max-w-6xl gap-12 px-5 py-16 lg:grid-cols-[1.1fr_1fr] lg:py-20">
         <div className="paper-in">
-          <p className="small-notation text-faded uppercase tracking-[0.18em]">
+          <p className="small-notation text-faded tracking-[0.18em]">
             Abstract — {MODEL_DETAILS.features} features · logistic regression
           </p>
           <h1 className="mt-4 font-display text-5xl leading-[1.02] tracking-tight text-ink md:text-6xl">
@@ -187,7 +187,7 @@ export default function LandingPage() {
 
         <div className="mt-12 border border-rule-ink bg-stock px-6 py-5 md:flex md:items-center md:justify-between md:gap-8">
           <div>
-            <p className="small-notation text-faded uppercase tracking-widest">Disclaimer</p>
+            <p className="small-notation text-faded tracking-widest">Disclaimer</p>
             <p className="measure mt-1 text-sm leading-relaxed text-ink">
               This application is for educational and informational purposes only. It should
               not be used as a substitute for professional medical diagnosis, advice, or

@@ -31,7 +31,7 @@ export default function VerdictPanel({ state, result, onReset, isDemoMode = fals
         role="alert"
       >
         <WifiOff className="mx-auto size-6 text-carmine" strokeWidth={1.5} aria-hidden />
-        <h3 className="mt-3 font-display text-xl text-ink">Service unavailable</h3>
+        <h2 className="mt-3 font-display text-xl text-ink">Service unavailable</h2>
         <p className="measure mx-auto mt-1 text-sm text-ink-soft">
           The prediction service could not be reached. The model is served from a
           backend API; try again in a moment.
@@ -50,10 +50,10 @@ export default function VerdictPanel({ state, result, onReset, isDemoMode = fals
   if (!result) {
     return (
       <div className="border border-rule bg-stock px-6 py-12 text-center">
-        <p className="small-notation text-faded uppercase tracking-widest">
+        <p className="small-notation text-faded">
           {EMPTY_STATE.eyebrow}
         </p>
-        <h3 className="mt-2 font-display text-2xl text-ink">{EMPTY_STATE.title}</h3>
+        <h2 className="mt-2 font-display text-2xl text-ink">{EMPTY_STATE.title}</h2>
         <p className="measure mx-auto mt-2 text-sm text-ink-soft">{EMPTY_STATE.body}</p>
       </div>
     )
@@ -70,15 +70,15 @@ export default function VerdictPanel({ state, result, onReset, isDemoMode = fals
           isBenign ? 'bg-benign-soft' : 'bg-carmine-soft'
         }`}
       >
-        <p className="small-notation text-faded uppercase tracking-widest">Verdict</p>
+        <p className="small-notation text-faded">Verdict</p>
         <div className="mt-1 flex flex-wrap items-center gap-3">
-          <h3
+          <h2
             className={`font-display text-4xl leading-none ${
               isBenign ? 'text-benign' : 'text-carmine'
             }`}
           >
             {result.prediction}
-          </h3>
+          </h2>
           <ConfidenceBadge benignPct={benign} malignantPct={malignant} />
         </div>
         <p className="mt-2 text-sm text-ink-soft">
