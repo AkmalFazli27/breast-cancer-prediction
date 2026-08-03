@@ -23,7 +23,7 @@ export default function FeatureInput({ meta }) {
         <span className="notation text-ink">{meta.label}</span>
         <button
           type="button"
-          className="mt-0.5 shrink-0 text-faded transition-colors hover:text-hematoxylin cursor-help"
+          className="relative mt-0.5 shrink-0 text-faded transition-colors hover:text-hematoxylin cursor-help"
           aria-label={`About ${meta.label}`}
           aria-describedby={`tip-${meta.key}`}
           onMouseEnter={() => setShowTip(true)}
@@ -32,6 +32,15 @@ export default function FeatureInput({ meta }) {
           onBlur={() => setShowTip(false)}
         >
           <Info className="size-3.5" strokeWidth={1.75} aria-hidden />
+          {showTip && (
+            <span
+              id={`tip-${meta.key}`}
+              role="tooltip"
+              className="absolute right-0 top-full z-20 mt-1 w-56 border border-rule-ink bg-paper px-3 py-2 text-xs leading-relaxed text-ink shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
+            >
+              {meta.tooltip}
+            </span>
+          )}
         </button>
       </label>
 
@@ -59,16 +68,6 @@ export default function FeatureInput({ meta }) {
         <span>{meta.min}</span>
         <span>{meta.max}</span>
       </div>
-
-      {showTip && (
-        <span
-          id={`tip-${meta.key}`}
-          role="tooltip"
-          className="absolute right-0 top-full z-20 mt-1 w-56 border border-rule-ink bg-paper px-3 py-2 text-xs leading-relaxed text-ink shadow-[0_2px_10px_rgba(0,0,0,0.08)]"
-        >
-          {meta.tooltip}
-        </span>
-      )}
     </div>
   )
 }
