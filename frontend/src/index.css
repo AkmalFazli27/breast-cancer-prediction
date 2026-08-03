@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/inter";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+/* =====================================================
+   Design System: Breast Cancer Prediction
+   World: "The Peer-Reviewed Page"
+   Ink on paper. One hematoxylin accent. Shadowless.
+   See DESIGN.md for the committed world and its rules.
+   ===================================================== */
+
+@theme {
+  /* Palette — paper and ink */
+  --color-paper: #faf9f7;
+  --color-stock: #f1f0ec;
+  --color-stock-deep: #eae8e2;
+  --color-ink: #1a1a1e;
+  --color-ink-soft: #4a4a4f;
+  --color-faded: #6e6c66;
+  --color-rule: #e0ded8;
+  --color-rule-ink: #c9c6be;
+
+  /* The single accent — hematoxylin */
+  --color-hematoxylin: #2f3d8f;
+  --color-hematoxylin-deep: #232c66;
+  --color-hematoxylin-pale: #eceef7;
+
+  /* Quarantined result colors */
+  --color-benign: #1e6e3c;
+  --color-benign-soft: #e7f2ec;
+  --color-carmine: #b3232e;
+  --color-carmine-soft: #fbeded;
+
+  /* Type — faces chosen from the paper's world */
+  --font-display: "Newsreader Variable", "Times New Roman", Georgia, serif;
+  --font-body: "Inter Variable", system-ui, -apple-system, sans-serif;
+  --font-notation: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Spacing rhythm */
+  --spacing-gutter: 1.5rem;
+}
+
+/* Base material */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  ::selection {
+    background-color: var(--color-hematoxylin);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-hematoxylin);
+    outline-offset: 3px;
+  }
+
+  /* The Measure Rule: prose never exceeds 75ch */
+  .measure {
+    max-width: 75ch;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   The Ink Rule handles depth: status surfaces are paper, separation is tonal
+   and hairline. No shadows anywhere in this system.
+   ------------------------------------------------------------------------- */
+
+/* The Notation Rule: dataset/model truth set in mono, verbatim */
+.notation {
+  font-family: var(--font-notation);
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  font-variant-ligatures: none;
+}
+
+.small-notation {
+  font-family: var(--font-notation);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* Figure Plate grammar: a bordered rectilinear frame with a caption rule */
+.figure-plate {
+  border: 1px solid var(--color-rule-ink);
+  background-color: var(--color-paper);
+}
+
+.figure-caption {
+  font-family: var(--font-notation);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-faded);
+  border-top: 1px solid var(--color-rule);
+}
+
+/* Hairline table — the paper's results table */
+.results-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.results-table th,
+.results-table td {
+  border-bottom: 1px solid var(--color-rule);
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  vertical-align: baseline;
+  font-size: 0.9375rem;
+}
+.results-table th {
+  font-family: var(--font-notation);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-faded);
+  font-weight: 500;
+  border-bottom-color: var(--color-rule-ink);
+}
+
+/* A raised sheet of stock paper, never a shadowed card */
+.sheet {
+  background-color: var(--color-stock);
+  border: 1px solid var(--color-rule);
+}
+
+/* Focused field underline — the input is a paper field with a single rule */
+.field {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-rule-ink);
+  border-radius: 0;
+  color: var(--color-ink);
+  font-family: var(--font-notation);
+  font-size: 0.9375rem;
+  padding: 0.35rem 0;
+  width: 100%;
+  transition: border-color 0.15s ease;
+}
+.field::placeholder {
+  color: var(--color-faded);
+}
+.field:focus {
+  outline: none;
+  border-bottom-color: var(--color-hematoxylin);
+  border-bottom-width: 2px;
+}
+.field[aria-invalid="true"] {
+  border-bottom-color: var(--color-carmine);
+}
+
+/* The single authored motion, paper-native */
+@keyframes paper-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.paper-in {
+  animation: paper-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .paper-in {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Recharts overrides to keep the figure in the paper's voice */
+.radar-tooltip {
+  font-family: var(--font-notation);
+  font-size: 0.75rem;
+}
