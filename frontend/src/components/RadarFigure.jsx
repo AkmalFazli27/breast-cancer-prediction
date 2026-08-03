@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts'
-import { FEATURE_META, RADAR_BASES } from '../constants/features'
+import { FEATURE_META, RADAR_BASES, radarBaseLabel } from '../constants/features'
 import { buildRadarData } from '../utils/scaling'
 
 const TRACES = [
@@ -78,7 +78,18 @@ export default function RadarFigure({ values }) {
             <PolarGrid stroke="#e0ded8" />
             <PolarAngleAxis
               dataKey="base"
-              tick={{ fill: '#6e6c66', fontSize: 11, fontFamily: 'IBM Plex Mono, monospace' }}
+              tick={({ x, y, payload, textAnchor }) => (
+                <text
+                  x={x}
+                  y={y}
+                  textAnchor={textAnchor}
+                  fill="#6e6c66"
+                  fontSize={11}
+                  fontFamily="IBM Plex Mono, monospace"
+                >
+                  {radarBaseLabel(payload.value)}
+                </text>
+              )}
             />
             <PolarRadiusAxis domain={[0, 1]} tickCount={5} tick={false} axisLine={false} />
             {visible.map((trace) => (

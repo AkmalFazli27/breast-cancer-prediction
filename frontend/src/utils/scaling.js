@@ -35,15 +35,17 @@ export function confidenceLevel(benignPct, malignantPct) {
 /**
  * Builds radar data in the legacy axis order.
  * Each base axis carries its mean / se / worst values (missing suffixes are skipped).
+ * Matches meta by base+suffix (not by string-concatenated key) so it is immune
+ * to the dataset's inconsistent naming — e.g. `concave points_mean` (space) vs
+ * `fractal_dimension_mean` (underscore).
  */
 export function buildRadarData(input, FEATURE_META, RADAR_BASES) {
   return RADAR_BASES.map((base) => {
     const suffixKeys = {}
     for (const suffix of ['mean', 'se', 'worst']) {
-      const key = `${base}_${suffix}`
-      const meta = FEATURE_META.find((f) => f.key === key)
-      if (meta && input[key] !== undefined && input[key] !== null) {
-        suffixKeys[suffix] = Number(scaleToUnit(Number(input[key]), meta).toFixed(3))
+      const meta = FEATURE_META.find((f) => f.base === base && f.suffix === suffix)
+      if (meta && input[meta.key] !== undefined && input[meta.key] !== null) {
+        suffixKeys[suffix] = Number(scaleToUnit(Number(input[meta.key]), meta).toFixed(3))
       }
     }
     return { base, ...suffixKeys }
