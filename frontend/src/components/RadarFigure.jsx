@@ -74,22 +74,33 @@ export default function RadarFigure({ values }) {
 
       <div className="min-h-[320px] py-4">
         <ResponsiveContainer width="100%" height={340}>
-          <RadarChart data={data} outerRadius="72%">
+          <RadarChart data={data} outerRadius="68%" margin={{ left: 28, right: 28 }}>
             <PolarGrid stroke="#e0ded8" />
             <PolarAngleAxis
               dataKey="base"
-              tick={({ x, y, payload, textAnchor }) => (
-                <text
-                  x={x}
-                  y={y}
-                  textAnchor={textAnchor}
-                  fill="#6e6c66"
-                  fontSize={11}
-                  fontFamily="IBM Plex Mono, monospace"
-                >
-                  {radarBaseLabel(payload.value)}
-                </text>
-              )}
+              tick={({ x, y, payload, textAnchor }) => {
+                const words = radarBaseLabel(payload.value).split(' ')
+                const multi = words.length > 1
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    textAnchor={textAnchor}
+                    fill="#6e6c66"
+                    fontSize={11}
+                    fontFamily="IBM Plex Mono, monospace"
+                  >
+                    {multi ? (
+                      <>
+                        <tspan x={x} dy="-0.5em">{words[0]}</tspan>
+                        <tspan x={x} dy="1.2em">{words.slice(1).join(' ')}</tspan>
+                      </>
+                    ) : (
+                      words[0]
+                    )}
+                  </text>
+                )
+              }}
             />
             <PolarRadiusAxis domain={[0, 1]} tickCount={5} tick={false} axisLine={false} />
             {visible.map((trace) => (
