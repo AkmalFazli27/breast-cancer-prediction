@@ -98,6 +98,7 @@ export default function LandingPage() {
         <FigurePlate
           number="Fig. 1"
           caption="The entered measurements, scaled to [0, 1] per feature. Values shown are the dataset means — submit your own on the predictor page."
+          className="lg:self-start"
         >
           <RadarFigure values={DEFAULT_VALUES} />
         </FigurePlate>

@@ -49,7 +49,7 @@ export default function RadarFigure({ values }) {
   const visible = TRACES.filter((t) => filter === 'all' || t.suffix === filter)
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-col">
       <div
         className="flex flex-wrap items-center gap-1 border-b border-rule px-4 py-2"
         role="group"
@@ -72,7 +72,7 @@ export default function RadarFigure({ values }) {
         ))}
       </div>
 
-      <div className="min-h-[320px] flex-1 py-4">
+      <div className="min-h-[320px] py-4">
         <ResponsiveContainer width="100%" height={340}>
           <RadarChart data={data} outerRadius="72%">
             <PolarGrid stroke="#e0ded8" />
