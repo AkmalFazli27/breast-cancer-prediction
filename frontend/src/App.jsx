@@ -16,14 +16,19 @@ function PageFallback() {
 
 /**
  * React Router navigates via pushState, which does not trigger the browser's
- * native anchor scrolling. Scroll to the hash target manually, polling briefly
- * for lazy-loaded sections to mount.
+ * native anchor scrolling and never resets scroll position. This manager:
+ * - no hash navigation (route change, brand click) -> smooth scroll to top
+ * - hash navigation -> scroll to the section, polling briefly for the
+ *   lazy-loaded LandingPage sections to mount
  */
-function ScrollToHash() {
+function ScrollManager() {
   const location = useLocation()
 
   useEffect(() => {
-    if (!location.hash) return
+    if (!location.hash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
     const id = location.hash.slice(1)
     const tryScroll = () => {
       const el = document.getElementById(id)
@@ -44,7 +49,7 @@ function ScrollToHash() {
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToHash />
+      <ScrollManager />
       <div className="flex min-h-screen flex-col">
         <Navbar />
         <div className="flex-1">
