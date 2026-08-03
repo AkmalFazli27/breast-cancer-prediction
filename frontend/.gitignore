@@ -29,3 +29,6 @@ shots/
 audit*.cjs
 job.cjs
 shot.cjs
+verify.cjs
+t.cjs
+extreme.cjs
