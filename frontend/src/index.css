@@ -175,8 +175,24 @@
 .paper-in {
   animation: paper-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* Probability bar — grows in transform-space, never animating layout */
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.bar-grow {
+  transform-origin: left center;
+  animation: bar-grow 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .paper-in {
+  .paper-in,
+  .bar-grow {
     animation: none;
   }
   html {

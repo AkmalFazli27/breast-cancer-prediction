@@ -66,7 +66,7 @@ export default function LandingPage() {
             A transparent predictor for{' '}
             <span className="italic text-hematoxylin">cell-nuclei</span> measurements
           </h1>
-          <p className="measure mt-6 text-lg leading-relaxed text-ink-soft">
+          <p className="measure mt-6 text-xl leading-relaxed text-ink-soft">
             Enter the {MODEL_DETAILS.features} measurements of a cell cluster and see the
             model&apos;s verdict — benign or malignant — with both probabilities, the
             confidence margin, and a radar figure of what was entered. Trained on the{' '}
@@ -172,7 +172,7 @@ export default function LandingPage() {
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {FAQ.map((item) => (
             <details key={item.q} className="group border border-rule bg-paper">
-              <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-display text-lg text-ink transition-colors hover:bg-stock">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-display text-lg text-ink transition-colors hover:bg-stock md:text-xl">
                 {item.q}
                 <span className="small-notation text-faded transition-transform duration-200 group-open:rotate-45">
                   +

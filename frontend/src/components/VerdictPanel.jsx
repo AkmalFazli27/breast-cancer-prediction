@@ -96,7 +96,11 @@ export default function VerdictPanel({ state, result, onReset, isDemoMode = fals
           </span>
         </div>
         <div className="mt-3">
-          <ProbabilityBar benignPct={benign} malignantPct={malignant} />
+          <ProbabilityBar
+            key={`${benign}-${malignant}`}
+            benignPct={benign}
+            malignantPct={malignant}
+          />
         </div>
 
         <div className="mt-6 flex items-center justify-between border-t border-rule pt-4">
