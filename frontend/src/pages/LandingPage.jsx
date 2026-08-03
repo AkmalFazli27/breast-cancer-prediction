@@ -105,7 +105,7 @@ export default function LandingPage() {
       </section>
 
       {/* Method */}
-      <section id="method" className="border-t border-rule bg-stock">
+      <section id="method" className="scroll-mt-20 border-t border-rule bg-stock">
         <div className="mx-auto max-w-6xl px-5 py-16">
           <SectionHeading
             numeral="01 — Method"
@@ -133,7 +133,7 @@ export default function LandingPage() {
       </section>
 
       {/* Results */}
-      <section id="results" className="mx-auto max-w-6xl px-5 py-16">
+      <section id="results" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
         <SectionHeading
           numeral="02 — Results"
           title="Performance on the held-out test set"
@@ -145,7 +145,7 @@ export default function LandingPage() {
       </section>
 
       {/* Figure */}
-      <section id="figure" className="border-t border-rule bg-stock">
+      <section id="figure" className="scroll-mt-20 border-t border-rule bg-stock">
         <div className="mx-auto max-w-6xl px-5 py-16">
           <SectionHeading
             numeral="03 — Figure"
@@ -164,7 +164,7 @@ export default function LandingPage() {
       </section>
 
       {/* Discussion / FAQ */}
-      <section id="discussion" className="mx-auto max-w-6xl px-5 py-16">
+      <section id="discussion" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
         <SectionHeading
           numeral="04 — Discussion"
           title="Frequently asked questions"
