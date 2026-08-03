@@ -1,0 +1,30 @@
+import { z } from 'zod'
+import { FEATURE_META } from './features'
+
+/**
+ * Zod schema derived from FEATURE_META — the single source of truth.
+ * Mirrors the backend contract: all fields required, numeric, within the
+ * dataset's observed range.
+ */
+export const predictionSchema = z.object(
+  Object.fromEntries(
+    FEATURE_META.map((f) => [
+      f.key,
+      z
+        .union([z.string(), z.number()], {
+          errorMap: () => ({ message: 'Required' }),
+        })
+        .transform((v) => (typeof v === 'string' ? v.trim() : String(v)))
+        .refine((v) => v.length > 0, { message: 'Required' })
+        .refine((v) => Number.isFinite(Number(v)) && v !== '' && !Number.isNaN(Number(v)), {
+          message: 'Enter a number',
+        })
+        .transform(Number)
+        .refine((n) => n >= f.min && n <= f.max, {
+          message: `Between ${f.min} and ${f.max}`,
+        }),
+    ]),
+  ),
+)
+
+export type PredictionInput = z.infer<typeof predictionSchema>
