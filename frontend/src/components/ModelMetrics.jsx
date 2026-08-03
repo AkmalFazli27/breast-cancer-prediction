@@ -1,4 +1,5 @@
 import { CONFUSION_MATRIX, MODEL_METRICS, TOP_FEATURES } from '../constants/metrics'
+import { featureLabel } from '../constants/features'
 
 /** The paper's results table — metrics with their n, confusion matrix, top features. */
 export default function ModelMetrics() {
@@ -65,7 +66,7 @@ export default function ModelMetrics() {
             {TOP_FEATURES.map((f, i) => (
               <tr key={f.key}>
                 <td className="w-8 notation text-faded">{String(i + 1).padStart(2, '0')}</td>
-                <td className="notation text-ink">{f.key}</td>
+                <td className="notation text-ink">{featureLabel(f.key)}</td>
                 <td className="notation font-medium text-ink text-right">{f.importance.toFixed(2)}%</td>
               </tr>
             ))}

@@ -1,15 +1,23 @@
 /**
  * FEATURE_META — the single source of truth for the 22 model features.
  *
- * Column names match `data/processed/removed_multicollinearity.csv` exactly,
- * including the three names that contain a space (`concave points_*`).
- * Per the product's Notation Rule, they are never prettified in the UI.
+ * Column names (`key`) match `data/processed/removed_multicollinearity.csv`
+ * exactly, including the three names that contain a space (`concave points_*`).
+ * Keys are the API/contract truth and are never altered. `label` is the
+ * humanized display name (title-cased, no underscores).
  *
  * min/max/mean are computed from that processed dataset. The radar chart
  * scales every feature to [0,1] against (value - min) / (max - min).
  */
 
 import { roundStep, sensibleStep } from '../utils/scaling'
+
+function titleCaseWords(str) {
+  return str
+    .split(' ')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
+}
 
 const QUALIFIERS = {
   mean: {
@@ -69,7 +77,7 @@ export const FEATURE_META = [
   { key: 'fractal_dimension_worst', base: 'fractal dimension', suffix: 'worst', min: 0.055, max: 0.2075, mean: 0.0839 },
 ].map((f) => ({
   ...f,
-  label: `${f.base.charAt(0).toUpperCase()}${f.base.slice(1)} — ${QUALIFIERS[f.suffix].label}`,
+  label: `${titleCaseWords(f.base)} ${QUALIFIERS[f.suffix].label}`,
   tooltip: `${BASE_MEANING[f.base]}. The ${QUALIFIERS[f.suffix].meaning}.`,
 }))
 
@@ -125,7 +133,12 @@ export const RADAR_BASES = [
 
 /** Rendered labels for radar axes. */
 export function radarBaseLabel(base) {
-  return base.charAt(0).toUpperCase() + base.slice(1)
+  return titleCaseWords(base)
+}
+
+/** Humanized display label for a raw feature key (used by metrics tables). */
+export function featureLabel(key) {
+  return FEATURE_META.find((f) => f.key === key)?.label ?? key
 }
 
 export const CONFIDENCE_LEVELS = {

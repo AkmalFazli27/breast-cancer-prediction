@@ -20,11 +20,11 @@ export default function FeatureInput({ meta }) {
         htmlFor={meta.key}
         className="flex items-start justify-between gap-2 text-[13px] leading-snug text-ink-soft"
       >
-        <span className="notation text-ink">{meta.key}</span>
+        <span className="notation text-ink">{meta.label}</span>
         <button
           type="button"
           className="mt-0.5 shrink-0 text-faded transition-colors hover:text-hematoxylin cursor-help"
-          aria-label={`About ${meta.key}`}
+          aria-label={`About ${meta.label}`}
           aria-describedby={`tip-${meta.key}`}
           onMouseEnter={() => setShowTip(true)}
           onMouseLeave={() => setShowTip(false)}
@@ -43,7 +43,7 @@ export default function FeatureInput({ meta }) {
           max={meta.max}
           step={step}
           className="slider flex-1"
-          aria-label={meta.key}
+          aria-label={meta.label}
           {...register(meta.key, { valueAsNumber: true })}
         />
         <output

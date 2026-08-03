@@ -31,7 +31,7 @@ function TraceTooltip({ active, payload }) {
       {payload.map((entry) => (
         <div key={entry.dataKey} className="flex items-center gap-2">
           <span className="size-2" style={{ backgroundColor: entry.color }} aria-hidden />
-          <span className="text-ink">{entry.payload?.base}</span>
+          <span className="text-ink">{radarBaseLabel(entry.payload?.base)}</span>
           <span className="text-ink-soft">{Number(entry.value).toFixed(3)}</span>
         </div>
       ))}
