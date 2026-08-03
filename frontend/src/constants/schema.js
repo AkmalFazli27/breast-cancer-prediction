@@ -26,5 +26,3 @@ export const predictionSchema = z.object(
     ]),
   ),
 )
-
-export type PredictionInput = z.infer<typeof predictionSchema>
