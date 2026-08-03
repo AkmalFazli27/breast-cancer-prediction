@@ -170,7 +170,7 @@ export default function LandingPage() {
           title="Frequently asked questions"
           lede="The dataset, the model, and what this tool is — and is not."
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 items-start">
           {FAQ.map((item) => (
             <details key={item.q} className="group border border-rule bg-paper">
               <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-display text-lg text-ink transition-colors hover:bg-stock md:text-xl">
