@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local verification artifacts
+dev.log
+shots/
+audit*.cjs
+job.cjs
+shot.cjs
