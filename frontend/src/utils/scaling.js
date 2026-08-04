@@ -1,12 +1,9 @@
-/** Min–max scaling of a single feature into [0,1], mirroring the legacy app. */
+/** Scale a feature value into [0,1]. */
 export function scaleToUnit(value, meta) {
   return (value - meta.min) / (meta.max - meta.min)
 }
 
-/**
- * Picks a "nice" slider step (1/2/5 x 10^k) for a feature's range so the
- * track carries roughly 200-2000 increments regardless of scale.
- */
+/** Pick a nice slider step (~200-2000 increments per track). */
 export function sensibleStep(min, max) {
   const range = max - min
   const raw = range / 500
@@ -17,14 +14,14 @@ export function sensibleStep(min, max) {
   return nice * base
 }
 
-/** Snaps a value to the nearest step multiple from min, matching the browser's range-input snapping. */
+/** Snap a value to the nearest step from min (matches browser range snapping). */
 export function roundStep(value, step, min = 0) {
   const snapped = min + Math.round((value - min) / step) * step
   const decimals = step < 1 ? Math.min(6, Math.ceil(-Math.log10(step)) + 1) : 0
   return Number(snapped.toFixed(decimals))
 }
 
-/** Confidence level from the probability margin, per the PRD's badge spec. */
+/** Confidence (high/medium/low) from the probability margin. */
 export function confidenceLevel(benignPct, malignantPct) {
   const margin = Math.abs(benignPct - malignantPct)
   if (margin >= 30) return 'high'
@@ -33,11 +30,8 @@ export function confidenceLevel(benignPct, malignantPct) {
 }
 
 /**
- * Builds radar data in the legacy axis order.
- * Each base axis carries its mean / se / worst values (missing suffixes are skipped).
- * Matches meta by base+suffix (not by string-concatenated key) so it is immune
- * to the dataset's inconsistent naming — e.g. `concave points_mean` (space) vs
- * `fractal_dimension_mean` (underscore).
+ * Build radar data in legacy axis order; match meta by base+suffix
+ * (names mix spaces and underscores).
  */
 export function buildRadarData(input, FEATURE_META, RADAR_BASES) {
   return RADAR_BASES.map((base) => {

@@ -1,11 +1,7 @@
 import { z } from 'zod'
 import { FEATURE_META } from './features'
 
-/**
- * Zod schema derived from FEATURE_META — the single source of truth.
- * Mirrors the backend contract: all fields required, numeric, within the
- * dataset's observed range.
- */
+/** Zod schema for the 22 features, derived from FEATURE_META. */
 export const predictionSchema = z.object(
   Object.fromEntries(
     FEATURE_META.map((f) => [

@@ -1,7 +1,4 @@
-/**
- * Model performance — source of truth: results/model_summary.csv (test set, n = 114)
- * and results/feature_importance.csv. Never claim numbers beyond these.
- */
+/** Model metrics (source: results/model_summary.csv, test n=114). */
 export const MODEL_METRICS = [
   { metric: 'Accuracy', value: '97.37%', note: '114 test samples' },
   { metric: 'Precision', value: '97.56%', note: 'among predicted positive' },

@@ -1,10 +1,7 @@
 import { useCallback, useState } from 'react'
 import { predict, predictDemo, isDemoMode } from '../services/prediction'
 
-/**
- * The single prediction hook: wraps the API call + loading + error + result,
- * as specified by the PRD's implementation decisions.
- */
+/** Prediction hook: wraps the API call with loading, error, and result state. */
 export function usePrediction() {
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)

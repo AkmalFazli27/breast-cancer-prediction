@@ -56,7 +56,7 @@ function SectionHeading({ numeral, title, lede }) {
 export default function LandingPage() {
   return (
     <main>
-      {/* Abstract — the paper's front matter */}
+      {/* Abstract */}
       <section className="mx-auto grid max-w-6xl gap-12 px-5 py-16 lg:grid-cols-[1.1fr_1fr] lg:py-20">
         <div className="paper-in">
           <p className="small-notation text-faded tracking-[0.18em]">
@@ -94,7 +94,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        {/* Figure 1 — the mechanism, demonstrated */}
+        {/* Figure 1 */}
         <FigurePlate
           number="Fig. 1"
           caption="The entered measurements, scaled to [0, 1] per feature. Values shown are the dataset means — submit your own on the predictor page."

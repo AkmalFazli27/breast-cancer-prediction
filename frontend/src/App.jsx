@@ -14,13 +14,7 @@ function PageFallback() {
   )
 }
 
-/**
- * React Router navigates via pushState, which does not trigger the browser's
- * native anchor scrolling and never resets scroll position. This manager:
- * - no hash navigation (route change, brand click) -> smooth scroll to top
- * - hash navigation -> scroll to the section, polling briefly for the
- *   lazy-loaded LandingPage sections to mount
- */
+/** Scroll to top on route change, or to the hash section (retries for lazy pages). */
 function ScrollManager() {
   const location = useLocation()
 

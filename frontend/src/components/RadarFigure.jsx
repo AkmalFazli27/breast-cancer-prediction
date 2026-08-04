@@ -39,10 +39,7 @@ function TraceTooltip({ active, payload }) {
   )
 }
 
-/**
- * The paper's figure — a radar of the entered measurements, scaled to [0,1]
- * per feature, with a Mean / SE / Worst / All filter.
- */
+/** Radar of entered measurements (scaled [0,1]) with a Mean/SE/Worst filter. */
 export default function RadarFigure({ values }) {
   const [filter, setFilter] = useState('all')
   const data = buildRadarData(values, FEATURE_META, RADAR_BASES)

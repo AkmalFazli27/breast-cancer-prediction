@@ -3,11 +3,7 @@ import { Info } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
 import { roundStep, sensibleStep } from '../utils/scaling'
 
-/**
- * A single labeled slider for one model feature, bounded by the dataset's
- * observed min-max, prefilled at the dataset mean, with a mono value readout
- * and a tooltip explaining the measurement.
- */
+/** One feature slider: label, tooltip, min/max bounds, value readout. */
 export default function FeatureInput({ meta }) {
   const { register, watch } = useFormContext()
   const [showTip, setShowTip] = useState(false)

@@ -1,13 +1,7 @@
 /**
- * FEATURE_META — the single source of truth for the 22 model features.
- *
- * Column names (`key`) match `data/processed/removed_multicollinearity.csv`
- * exactly, including the three names that contain a space (`concave points_*`).
- * Keys are the API/contract truth and are never altered. `label` is the
- * humanized display name (title-cased, no underscores).
- *
- * min/max/mean are computed from that processed dataset. The radar chart
- * scales every feature to [0,1] against (value - min) / (max - min).
+ * FEATURE_META: the 22 model features. Keys match the processed CSV (some
+ * contain spaces) and are the API contract; label is the display name.
+ * min/max/mean come from that dataset.
  */
 
 import { roundStep, sensibleStep } from '../utils/scaling'
@@ -81,7 +75,7 @@ export const FEATURE_META = [
   tooltip: `${BASE_MEANING[f.base]}. The ${QUALIFIERS[f.suffix].meaning}.`,
 }))
 
-/** Group order and titles, mirroring the PRD's Mean / Standard Error / Worst */
+/** Feature group order. */
 export const FEATURE_GROUPS = [
   {
     id: 'mean',
@@ -111,7 +105,7 @@ export const FEATURE_GROUPS = [
 
 export const FEATURE_KEYS = FEATURE_META.map((f) => f.key)
 
-/** Default form values — the dataset means, snapped to each slider's step. */
+/** Default form values: dataset means snapped to slider steps. */
 export const DEFAULT_VALUES = Object.fromEntries(
   FEATURE_META.map((f) => [
     f.key,
@@ -119,7 +113,7 @@ export const DEFAULT_VALUES = Object.fromEntries(
   ]),
 )
 
-/** Radar axis ordering — the legacy ordering: base then mean/SE/worst. */
+/** Radar axis order (legacy). */
 export const RADAR_BASES = [
   'concavity',
   'area',
@@ -131,12 +125,12 @@ export const RADAR_BASES = [
   'fractal dimension',
 ]
 
-/** Rendered labels for radar axes. */
+/** Radar axis label. */
 export function radarBaseLabel(base) {
   return titleCaseWords(base)
 }
 
-/** Humanized display label for a raw feature key (used by metrics tables). */
+/** Display label for a feature key. */
 export function featureLabel(key) {
   return FEATURE_META.find((f) => f.key === key)?.label ?? key
 }

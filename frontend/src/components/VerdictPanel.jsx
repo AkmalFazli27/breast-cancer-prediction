@@ -8,10 +8,7 @@ const EMPTY_STATE = {
   body: 'Enter the 22 cell-nuclei measurements and submit to run the model.',
 }
 
-/**
- * The prediction result — verdict headline, probabilities, confidence badge.
- * Handles idle / loading / success / error states.
- */
+/** Verdict panel: idle / loading / error / result states. */
 export default function VerdictPanel({ state, result, onReset, isDemoMode = false }) {
   if (state === 'loading') {
     return (

@@ -8,7 +8,7 @@ const LEVEL_STYLE = {
 
 const LEVEL_LABEL = { high: 'High confidence', medium: 'Medium confidence', low: 'Low confidence' }
 
-/** The confidence badge — High / Medium / Low based on the probability margin. */
+/** Confidence badge: High/Medium/Low from the probability margin. */
 export default function ConfidenceBadge({ benignPct, malignantPct }) {
   const level = confidenceLevel(benignPct, malignantPct)
   return (
