@@ -3,6 +3,7 @@ import { ArrowRight, Database, FlaskConical, Scale, BrainCircuit } from 'lucide-
 import FigurePlate from '../components/FigurePlate'
 import ModelMetrics from '../components/ModelMetrics'
 import RadarFigure from '../components/RadarFigure'
+import Reveal from '../components/Reveal'
 import { DEFAULT_VALUES } from '../constants/features'
 import { MODEL_DETAILS, MODEL_METRICS } from '../constants/metrics'
 
@@ -107,96 +108,116 @@ export default function LandingPage() {
       {/* Method */}
       <section id="method" className="scroll-mt-20 border-t border-rule bg-stock">
         <div className="mx-auto max-w-6xl px-5 py-16">
-          <SectionHeading
-            numeral="01 — Method"
-            title="How the verdict is reached"
-            lede="No black box: the same pipeline that produced the model's published results runs behind this page."
-          />
+          <Reveal>
+            <SectionHeading
+              numeral="01 — Method"
+              title="How the verdict is reached"
+              lede="No black box: the same pipeline that produced the model's published results runs behind this page."
+            />
+          </Reveal>
           <div className="mt-10 grid gap-8 md:grid-cols-3">
             {PIPELINE_STEPS.map((step, i) => (
-              <div key={step.title} className="border border-rule bg-paper p-6">
-                <div className="flex items-center justify-between">
-                  <step.icon className="size-6 text-hematoxylin" strokeWidth={1.5} aria-hidden />
-                  <span className="small-notation text-faded">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+              <Reveal key={step.title} delay={i * 80}>
+                <div className="border border-rule bg-paper p-6">
+                  <div className="flex items-center justify-between">
+                    <step.icon className="size-6 text-hematoxylin" strokeWidth={1.5} aria-hidden />
+                    <span className="small-notation text-faded">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-xl text-ink">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
                 </div>
-                <h3 className="mt-4 font-display text-xl text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{step.body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <p className="small-notation mt-8 text-faded">
-            Order is fixed: scale with scaler.pkl → predict with final_model_logistic_regression.pkl
-          </p>
+          <Reveal>
+            <p className="small-notation mt-8 text-faded">
+              Order is fixed: scale with scaler.pkl → predict with final_model_logistic_regression.pkl
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* Results */}
       <section id="results" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
-        <SectionHeading
-          numeral="02 — Results"
-          title="Performance on the held-out test set"
-          lede={`${MODEL_DETAILS.model} on ${MODEL_DETAILS.test} samples, split from the ${MODEL_DETAILS.samples}-sample dataset at training time.`}
-        />
+        <Reveal>
+          <SectionHeading
+            numeral="02 — Results"
+            title="Performance on the held-out test set"
+            lede={`${MODEL_DETAILS.model} on ${MODEL_DETAILS.test} samples, split from the ${MODEL_DETAILS.samples}-sample dataset at training time.`}
+          />
+        </Reveal>
         <div className="mt-10">
-          <ModelMetrics />
+          <Reveal>
+            <ModelMetrics />
+          </Reveal>
         </div>
       </section>
 
       {/* Figure */}
       <section id="figure" className="scroll-mt-20 border-t border-rule bg-stock">
         <div className="mx-auto max-w-6xl px-5 py-16">
-          <SectionHeading
-            numeral="03 — Figure"
-            title="The figure, live"
-            lede="The radar above is not a static image — it is the predictor's own figure, rendering the current input and filterable by measurement group."
-          />
+          <Reveal>
+            <SectionHeading
+              numeral="03 — Figure"
+              title="The figure, live"
+              lede="The radar above is not a static image — it is the predictor's own figure, rendering the current input and filterable by measurement group."
+            />
+          </Reveal>
           <div className="mt-10">
-            <FigurePlate
-              number="Fig. 2"
-              caption="Radar of the current input values, scaled per feature to [0, 1]. Use the filter to isolate Mean, Standard Error, or Worst measurements."
-            >
-              <RadarFigure values={DEFAULT_VALUES} />
-            </FigurePlate>
+            <Reveal>
+              <FigurePlate
+                number="Fig. 2"
+                caption="Radar of the current input values, scaled per feature to [0, 1]. Use the filter to isolate Mean, Standard Error, or Worst measurements."
+              >
+                <RadarFigure values={DEFAULT_VALUES} />
+              </FigurePlate>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* Discussion / FAQ */}
       <section id="discussion" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
-        <SectionHeading
-          numeral="04 — Discussion"
-          title="Frequently asked questions"
-          lede="The dataset, the model, and what this tool is — and is not."
-        />
+        <Reveal>
+          <SectionHeading
+            numeral="04 — Discussion"
+            title="Frequently asked questions"
+            lede="The dataset, the model, and what this tool is — and is not."
+          />
+        </Reveal>
         <div className="mt-10 grid gap-6 md:grid-cols-2 items-start">
-          {FAQ.map((item) => (
-            <details key={item.q} className="group border border-rule bg-paper">
-              <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-display text-lg text-ink transition-colors hover:bg-stock md:text-xl">
-                {item.q}
-                <span className="small-notation text-faded transition-transform duration-200 group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="measure border-t border-rule px-5 py-4 text-sm leading-relaxed text-ink-soft">
-                {item.a}
-              </p>
-            </details>
+          {FAQ.map((item, i) => (
+            <Reveal key={item.q} delay={(i % 2) * 80}>
+              <details className="group border border-rule bg-paper">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-display text-lg text-ink transition-colors hover:bg-stock md:text-xl">
+                  {item.q}
+                  <span className="small-notation text-faded transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="measure border-t border-rule px-5 py-4 text-sm leading-relaxed text-ink-soft">
+                  {item.a}
+                </p>
+              </details>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-12 border border-rule-ink bg-stock px-6 py-5 md:flex md:items-center md:justify-between md:gap-8">
-          <div>
-            <p className="small-notation text-faded tracking-widest">Disclaimer</p>
-            <p className="measure mt-1 text-sm leading-relaxed text-ink">
-              This application is for educational and informational purposes only. It should
-              not be used as a substitute for professional medical diagnosis, advice, or
-              treatment.
-            </p>
+        <Reveal>
+          <div className="mt-12 border border-rule-ink bg-stock px-6 py-5 md:flex md:items-center md:justify-between md:gap-8">
+            <div>
+              <p className="small-notation text-faded tracking-widest">Disclaimer</p>
+              <p className="measure mt-1 text-sm leading-relaxed text-ink">
+                This application is for educational and informational purposes only. It should
+                not be used as a substitute for professional medical diagnosis, advice, or
+                treatment.
+              </p>
+            </div>
+            <FlaskConical className="mt-4 size-8 shrink-0 text-faded md:mt-0" strokeWidth={1.25} aria-hidden />
           </div>
-          <FlaskConical className="mt-4 size-8 shrink-0 text-faded md:mt-0" strokeWidth={1.25} aria-hidden />
-        </div>
+        </Reveal>
       </section>
     </main>
   )

@@ -192,6 +192,19 @@
   animation: paper-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* Probability bar motion */
 @keyframes bar-grow {
   from {
@@ -210,6 +223,12 @@
   .paper-in,
   .bar-grow {
     animation: none;
+  }
+  .reveal,
+  .reveal-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   html {
     scroll-behavior: auto;
