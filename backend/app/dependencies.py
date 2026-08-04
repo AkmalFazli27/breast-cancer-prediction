@@ -4,5 +4,5 @@ _service = InferenceService()
 
 
 def get_service() -> InferenceService:
-    """FastAPI dependency; override in tests via app.dependency_overrides."""
+    # FastAPI dependency
     return _service

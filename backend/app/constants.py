@@ -5,8 +5,6 @@ MODEL_DIR = REPO_ROOT / "models"
 SCALER_PATH = MODEL_DIR / "scaler.pkl"
 MODEL_PATH = MODEL_DIR / "final_model_logistic_regression.pkl"
 
-# Model feature order — must match data/processed/removed_multicollinearity.csv
-# (verified by tests/test_constants.py) and frontend FEATURE_META keys.
 FEATURE_KEYS = [
     "texture_mean",
     "smoothness_mean",
@@ -32,7 +30,6 @@ FEATURE_KEYS = [
     "fractal_dimension_worst",
 ]
 
-# Dataset min/max per feature — mirrors frontend FEATURE_META (src/constants/features.js).
 FEATURE_BOUNDS = {
     "texture_mean": (9.71, 39.28),
     "smoothness_mean": (0.0526, 0.1634),
@@ -58,5 +55,4 @@ FEATURE_BOUNDS = {
     "fractal_dimension_worst": (0.055, 0.2075),
 }
 
-# Model class index (0/1) to API label.
 LABEL_MAP = {0: "Benign", 1: "Malignant"}
