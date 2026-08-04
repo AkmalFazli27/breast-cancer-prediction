@@ -1,9 +1,4 @@
-/**
- * FEATURE_META: the 22 model features. Keys match the processed CSV (some
- * contain spaces) and are the API contract; label is the display name.
- * min/max/mean come from that dataset.
- */
-
+// The 22 model features. Keys match the processed CSV, label is the display name, min/max/mean come from that dataset.
 import { roundStep, sensibleStep } from '../utils/scaling'
 
 function titleCaseWords(str) {

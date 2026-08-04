@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-/** Reveals an element as it scrolls into view; with reset, hides it again when it leaves. */
+// Reveals an element as it scrolls into view; with reset, hides it again when it leaves.
 export function useReveal({ reset = false } = {}) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
