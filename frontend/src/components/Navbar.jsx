@@ -1,5 +1,4 @@
 import { Link, NavLink } from 'react-router-dom'
-import { Activity } from 'lucide-react'
 
 const NAV = [
   { to: '/#method', label: 'Method' },
@@ -13,11 +12,9 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-rule bg-paper/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3.5">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <span className="flex size-8 items-center justify-center border border-rule-ink bg-stock">
-            <Activity className="size-4 text-hematoxylin" strokeWidth={1.75} aria-hidden />
-          </span>
+          <img src="/logo.svg" alt="" className="size-8" aria-hidden />
           <span className="font-display text-lg leading-none tracking-tight group-hover:underline underline-offset-4">
-            Breast Cancer Prediction
+            OncoLens
           </span>
         </Link>
 
