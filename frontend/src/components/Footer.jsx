@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom'
 const REFERENCES = [
   {
     id: 1,
-    text: 'W. N. Street, W. H. Wolberg, and O. L. Mangasarian. Nuclear feature extraction for breast tumor diagnosis. Wisconsin Breast Cancer Diagnostic Dataset, UCI Machine Learning Repository.',
+    text: 'W. N. Street, W. H. Wolberg, and O. L. Mangasarian. Nuclear feature extraction for breast tumor diagnosis.',
   },
   {
     id: 2,
-    text: 'Fazli, A. Breast Cancer Prediction — machine learning pipeline and model artifacts. Repository: data/processed, models/, results/.',
-  },
-  {
-    id: 3,
-    text: 'This application — React + FastAPI frontend served over the trained logistic regression pipeline. Educational use only.',
+    text: 'Wisconsin Breast Cancer Diagnostic Dataset, UCI Machine Learning Repository.',
+    href: 'https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic',
   },
 ]
 
@@ -25,7 +22,22 @@ export default function Footer() {
             {REFERENCES.map((ref) => (
               <li key={ref.id} className="flex gap-3">
                 <span className="small-notation text-faded">{ref.id}.</span>
-                <span className="measure">{ref.text}</span>
+                <span className="measure">
+                  {ref.text}
+                  {ref.href && (
+                    <>
+                      {' '}
+                      <a
+                        href={ref.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline underline-offset-4 hover:text-hematoxylin"
+                      >
+                        Link
+                      </a>
+                    </>
+                  )}
+                </span>
               </li>
             ))}
           </ol>
@@ -41,7 +53,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://www.streamlit.app/"
+                href="https://breast-cancer-predictor-project.streamlit.app/"
                 target="_blank"
                 rel="noreferrer"
                 className="underline underline-offset-4 hover:text-hematoxylin"
