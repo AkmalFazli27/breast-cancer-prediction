@@ -61,6 +61,26 @@ export default function Footer() {
                 Legacy Streamlit demo
               </a>
             </li>
+            <li>
+              <a
+                href="https://github.com/your-username/breast-cancer-prediction"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 hover:text-hematoxylin"
+              >
+                GitHub repository
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/akmal-fazli/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 hover:text-hematoxylin"
+              >
+                LinkedIn
+              </a>
+            </li>
             <li className="small-notation pt-3 text-faded">
               {new Date().getFullYear()} — Akmal Fazli
             </li>
