@@ -2,7 +2,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, create_model
 
-from app.constants import FEATURE_BOUNDS, FEATURE_KEYS
+from app.constants import FEATURE_BOUNDS
 
 _fields = {
     key: (float, Field(ge=lo, le=hi))
