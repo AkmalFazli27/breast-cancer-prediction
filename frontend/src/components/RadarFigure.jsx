@@ -120,6 +120,19 @@ export default function RadarFigure({ values }) {
           </RadarChart>
         </ResponsiveContainer>
       </div>
+
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-rule px-4 pb-4 pt-3">
+        {visible.map((trace) => (
+          <span key={trace.suffix} className="flex items-center gap-1.5">
+            <span
+              className="size-2.5 shrink-0"
+              style={{ backgroundColor: trace.color }}
+              aria-hidden
+            />
+            <span className="small-notation text-faded">{trace.label}</span>
+          </span>
+        ))}
+      </div>
     </div>
   )
 }

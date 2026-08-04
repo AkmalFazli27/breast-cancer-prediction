@@ -1,0 +1,11 @@
+# graphify ignores — mirrors .gitignore, but re-includes docs/
+# (the PRD lives there and is part of the knowledge corpus)
+.vscode/
+.venv
+AGENTS.md
+graphify-out/
+.opencode
+PRODUCT.md
+DESIGN.md
+.impeccable
+!docs/
