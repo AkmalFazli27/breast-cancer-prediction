@@ -59,7 +59,7 @@ export default function LandingPage() {
     <main>
       {/* Abstract */}
       <section className="mx-auto grid max-w-6xl gap-12 px-5 py-16 lg:grid-cols-[1.1fr_1fr] lg:py-20">
-        <div className="paper-in">
+        <Reveal reset>
           <p className="small-notation text-faded tracking-[0.18em]">
             Abstract — {MODEL_DETAILS.features} features · logistic regression
           </p>
@@ -93,16 +93,17 @@ export default function LandingPage() {
           <p className="mt-8 border-l border-rule-ink pl-4 text-sm italic leading-relaxed text-faded">
             Educational use only — this tool does not provide medical advice or diagnosis.
           </p>
-        </div>
+        </Reveal>
 
         {/* Figure 1 */}
-        <FigurePlate
-          number="Fig. 1"
-          caption="The entered measurements, scaled to [0, 1] per feature. Values shown are the dataset means — submit your own on the predictor page."
-          className="lg:self-start"
-        >
-          <RadarFigure values={DEFAULT_VALUES} />
-        </FigurePlate>
+        <Reveal reset delay={100} className="lg:self-start">
+          <FigurePlate
+            number="Fig. 1"
+            caption="The entered measurements, scaled to [0, 1] per feature. Values shown are the dataset means — submit your own on the predictor page."
+          >
+            <RadarFigure values={DEFAULT_VALUES} />
+          </FigurePlate>
+        </Reveal>
       </section>
 
       {/* Method */}
