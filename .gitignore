@@ -7,3 +7,5 @@ graphify-out/
 PRODUCT.md
 DESIGN.md
 .impeccable
+__pycache__/
+.pytest_cache/
