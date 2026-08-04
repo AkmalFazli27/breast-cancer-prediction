@@ -9,3 +9,4 @@ DESIGN.md
 .impeccable
 __pycache__/
 .pytest_cache/
+backend/uvicorn_*.log
