@@ -63,7 +63,7 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="https://github.com/your-username/breast-cancer-prediction"
+                href="https://github.com/AkmalFazli27/breast-cancer-prediction"
                 target="_blank"
                 rel="noreferrer"
                 className="underline underline-offset-4 hover:text-hematoxylin"
