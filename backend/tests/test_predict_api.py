@@ -66,6 +66,13 @@ def test_predict_out_of_range_is_422(client):
     assert resp.status_code == 422
 
 
+def test_predict_above_max_is_422(client):
+    payload = dict(GOLDEN_BENIGN_A)
+    payload["texture_mean"] = 999.0
+    resp = client.post("/api/v1/predict", json=payload)
+    assert resp.status_code == 422
+
+
 def test_health_returns_ok(client):
     resp = client.get("/health")
     assert resp.status_code == 200
