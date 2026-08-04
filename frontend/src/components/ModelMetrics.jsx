@@ -1,7 +1,7 @@
 import { CONFUSION_MATRIX, MODEL_METRICS, TOP_FEATURES } from '../constants/metrics'
 import { featureLabel } from '../constants/features'
 
-/** Results tables: metrics, confusion matrix, top features. */
+// Results tables: metrics, confusion matrix, top features.
 export default function ModelMetrics() {
   return (
     <div className="grid gap-10 lg:grid-cols-2">

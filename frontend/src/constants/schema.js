@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { FEATURE_META } from './features'
 
-/** Zod schema for the 22 features, derived from FEATURE_META. */
+// Zod schema for the 22 features, derived from FEATURE_META.
 export const predictionSchema = z.object(
   Object.fromEntries(
     FEATURE_META.map((f) => [

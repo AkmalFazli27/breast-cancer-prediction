@@ -14,7 +14,7 @@ function PageFallback() {
   )
 }
 
-/** Scroll to top on route change, or to the hash section (retries for lazy pages). */
+// Scroll to top on route change, or to the hash section (retries for lazy pages).
 function ScrollManager() {
   const location = useLocation()
 

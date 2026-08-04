@@ -1,9 +1,9 @@
-/** Scale a feature value into [0,1]. */
+// Scale a feature value into [0,1].
 export function scaleToUnit(value, meta) {
   return (value - meta.min) / (meta.max - meta.min)
 }
 
-/** Pick a nice slider step (~200-2000 increments per track). */
+// Pick a nice slider step (~200-2000 increments per track).
 export function sensibleStep(min, max) {
   const range = max - min
   const raw = range / 500
@@ -14,14 +14,14 @@ export function sensibleStep(min, max) {
   return nice * base
 }
 
-/** Snap a value to the nearest step from min (matches browser range snapping). */
+// Snap a value to the nearest step from min (matches browser range snapping).
 export function roundStep(value, step, min = 0) {
   const snapped = min + Math.round((value - min) / step) * step
   const decimals = step < 1 ? Math.min(6, Math.ceil(-Math.log10(step)) + 1) : 0
   return Number(snapped.toFixed(decimals))
 }
 
-/** Confidence (high/medium/low) from the probability margin. */
+// Confidence (high/medium/low) from the probability margin.
 export function confidenceLevel(benignPct, malignantPct) {
   const margin = Math.abs(benignPct - malignantPct)
   if (margin >= 30) return 'high'

@@ -3,7 +3,7 @@ import { Info } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
 import { roundStep, sensibleStep } from '../utils/scaling'
 
-/** One feature slider: label, tooltip, min/max bounds, value readout. */
+// One feature slider: label, tooltip, min/max bounds, value readout.
 export default function FeatureInput({ meta }) {
   const { register, watch } = useFormContext()
   const [showTip, setShowTip] = useState(false)

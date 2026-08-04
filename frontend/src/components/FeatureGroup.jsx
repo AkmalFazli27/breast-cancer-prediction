@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import { FEATURE_META } from '../constants/features'
 import FeatureInput from './FeatureInput'
 
-/** Collapsible feature group (fieldset). */
+// Collapsible feature group (fieldset).
 export default function FeatureGroup({ group, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen)
   const features = FEATURE_META.filter((f) => group.keys.includes(f.key))

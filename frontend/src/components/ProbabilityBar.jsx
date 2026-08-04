@@ -1,4 +1,4 @@
-/** Bar showing the benign/malignant probability split. */
+// Bar showing the benign/malignant probability split.
 export default function ProbabilityBar({ benignPct, malignantPct }) {
   return (
     <div>

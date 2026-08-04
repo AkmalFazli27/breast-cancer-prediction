@@ -42,7 +42,7 @@ const BASE_MEANING = {
   area: 'Area — the area of the cell nucleus',
 }
 
-/** @type {{key:string, label:string, group:'mean'|'se'|'worst', min:number, max:number, mean:number, tooltip:string}[]} */
+// @type {{key:string, label:string, group:'mean'|'se'|'worst', min:number, max:number, mean:number, tooltip:string}[]}
 export const FEATURE_META = [
   // ---- Mean (6) ----
   { key: 'texture_mean', base: 'texture', suffix: 'mean', min: 9.71, max: 39.28, mean: 19.2896 },
@@ -75,7 +75,7 @@ export const FEATURE_META = [
   tooltip: `${BASE_MEANING[f.base]}. The ${QUALIFIERS[f.suffix].meaning}.`,
 }))
 
-/** Feature group order. */
+// Feature group order.
 export const FEATURE_GROUPS = [
   {
     id: 'mean',
@@ -105,7 +105,7 @@ export const FEATURE_GROUPS = [
 
 export const FEATURE_KEYS = FEATURE_META.map((f) => f.key)
 
-/** Default form values: dataset means snapped to slider steps. */
+// Default form values: dataset means snapped to slider steps.
 export const DEFAULT_VALUES = Object.fromEntries(
   FEATURE_META.map((f) => [
     f.key,
@@ -113,7 +113,7 @@ export const DEFAULT_VALUES = Object.fromEntries(
   ]),
 )
 
-/** Radar axis order (legacy). */
+// Radar axis order (legacy).
 export const RADAR_BASES = [
   'concavity',
   'area',
@@ -125,12 +125,12 @@ export const RADAR_BASES = [
   'fractal dimension',
 ]
 
-/** Radar axis label. */
+// Radar axis label.
 export function radarBaseLabel(base) {
   return titleCaseWords(base)
 }
 
-/** Display label for a feature key. */
+// Display label for a feature key.
 export function featureLabel(key) {
   return FEATURE_META.find((f) => f.key === key)?.label ?? key
 }

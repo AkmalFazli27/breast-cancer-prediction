@@ -4,15 +4,8 @@
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
 
-/* =====================================================
-   Design System: Breast Cancer Prediction
-   World: "The Peer-Reviewed Page"
-   Ink on paper. One hematoxylin accent. Shadowless.
-   See DESIGN.md for the committed world and its rules.
-   ===================================================== */
-
 @theme {
-  /* Palette — paper and ink */
+  /* Palette */
   --color-paper: #faf9f7;
   --color-stock: #f1f0ec;
   --color-stock-deep: #eae8e2;
@@ -22,18 +15,18 @@
   --color-rule: #e0ded8;
   --color-rule-ink: #c9c6be;
 
-  /* The single accent — hematoxylin */
+  /* Single accent */
   --color-hematoxylin: #2f3d8f;
   --color-hematoxylin-deep: #232c66;
   --color-hematoxylin-pale: #eceef7;
 
-  /* Quarantined result colors */
+  /* Result colors */
   --color-benign: #1e6e3c;
   --color-benign-soft: #e7f2ec;
   --color-carmine: #b3232e;
   --color-carmine-soft: #fbeded;
 
-  /* Type — faces chosen from the paper's world */
+  /* Type faces */
   --font-display: "Newsreader Variable", "Times New Roman", Georgia, serif;
   --font-body: "Inter Variable", system-ui, -apple-system, sans-serif;
   --font-notation: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
@@ -68,20 +61,15 @@
     outline-offset: 3px;
   }
 
-  /* The Measure Rule: prose never exceeds ~75 average characters.
-     Expressed in ems, not ch: Inter's "0" glyph is ~0.63em wide, so a
-     ch-based 75ch would render ~95 average characters per line. */
+  /* Measure: max ~75 avg chars (38em) */
   .measure {
     max-width: 38em;
   }
 }
 
-/* -------------------------------------------------------------------------
-   The Ink Rule handles depth: status surfaces are paper, separation is tonal
-   and hairline. No shadows anywhere in this system.
-   ------------------------------------------------------------------------- */
+/* Depth: tonal, no shadows */
 
-/* The Notation Rule: dataset/model truth set in mono, verbatim */
+/* Mono for data */
 .notation {
   font-family: var(--font-notation);
   font-size: 0.875rem;
@@ -95,7 +83,7 @@
   letter-spacing: 0.02em;
 }
 
-/* Figure Plate grammar: a bordered rectilinear frame with a caption rule */
+/* Figure plate */
 .figure-plate {
   border: 1px solid var(--color-rule-ink);
   background-color: var(--color-paper);
@@ -109,7 +97,7 @@
   border-top: 1px solid var(--color-rule);
 }
 
-/* Hairline table — the paper's results table */
+/* Results table */
 .results-table {
   border-collapse: collapse;
   width: 100%;
@@ -132,13 +120,13 @@
   border-bottom-color: var(--color-rule-ink);
 }
 
-/* A raised sheet of stock paper, never a shadowed card */
+/* Sheet: tonal panel */
 .sheet {
   background-color: var(--color-stock);
   border: 1px solid var(--color-rule);
 }
 
-/* The slider — a paper track with a square hematoxylin thumb */
+/* Slider */
 .slider {
   -webkit-appearance: none;
   appearance: none;
@@ -189,7 +177,7 @@
   cursor: not-allowed;
 }
 
-/* The single authored motion, paper-native */
+/* Page-in motion */
 @keyframes paper-in {
   from {
     opacity: 0;
@@ -204,7 +192,7 @@
   animation: paper-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Probability bar — grows in transform-space, never animating layout */
+/* Probability bar motion */
 @keyframes bar-grow {
   from {
     transform: scaleX(0);
@@ -228,7 +216,7 @@
   }
 }
 
-/* Recharts overrides to keep the figure in the paper's voice */
+/* Recharts overrides */
 .radar-tooltip {
   font-family: var(--font-notation);
   font-size: 0.75rem;
