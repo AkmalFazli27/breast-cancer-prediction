@@ -25,7 +25,7 @@ class InferenceService:
                 return
             scaler = joblib.load(SCALER_PATH)
             model = joblib.load(MODEL_PATH)
-            if model.n_features_in_ != 22 or scaler.n_features_in_ != 22:
+            if model.n_features_in_ != len(FEATURE_KEYS) or scaler.n_features_in_ != len(FEATURE_KEYS):
                 raise RuntimeError(
                     f"artifact feature count mismatch: model={model.n_features_in_}, "
                     f"scaler={scaler.n_features_in_}"

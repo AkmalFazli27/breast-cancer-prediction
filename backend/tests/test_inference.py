@@ -13,8 +13,8 @@ def service():
 
 
 def test_artifacts_expect_22_features(service):
-    assert service._model.n_features_in_ == 22
-    assert service._scaler.n_features_in_ == 22
+    assert service._model.n_features_in_ == len(FEATURE_KEYS)
+    assert service._scaler.n_features_in_ == len(FEATURE_KEYS)
 
 
 def test_artifact_feature_names_match_constants():
