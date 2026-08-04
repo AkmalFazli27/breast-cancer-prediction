@@ -108,7 +108,7 @@ export default function LandingPage() {
       {/* Method */}
       <section id="method" className="scroll-mt-20 border-t border-rule bg-stock">
         <div className="mx-auto max-w-6xl px-5 py-16">
-          <Reveal>
+          <Reveal reset>
             <SectionHeading
               numeral="01 — Method"
               title="How the verdict is reached"
@@ -117,7 +117,7 @@ export default function LandingPage() {
           </Reveal>
           <div className="mt-10 grid gap-8 md:grid-cols-3">
             {PIPELINE_STEPS.map((step, i) => (
-              <Reveal key={step.title} delay={i * 80}>
+              <Reveal key={step.title} delay={i * 80} reset>
                 <div className="border border-rule bg-paper p-6">
                   <div className="flex items-center justify-between">
                     <step.icon className="size-6 text-hematoxylin" strokeWidth={1.5} aria-hidden />
@@ -131,7 +131,7 @@ export default function LandingPage() {
               </Reveal>
             ))}
           </div>
-          <Reveal>
+          <Reveal reset>
             <p className="small-notation mt-8 text-faded">
               Order is fixed: scale with scaler.pkl → predict with final_model_logistic_regression.pkl
             </p>
@@ -141,7 +141,7 @@ export default function LandingPage() {
 
       {/* Results */}
       <section id="results" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
-        <Reveal>
+        <Reveal reset>
           <SectionHeading
             numeral="02 — Results"
             title="Performance on the held-out test set"
@@ -149,7 +149,7 @@ export default function LandingPage() {
           />
         </Reveal>
         <div className="mt-10">
-          <Reveal>
+          <Reveal reset>
             <ModelMetrics />
           </Reveal>
         </div>
@@ -158,7 +158,7 @@ export default function LandingPage() {
       {/* Figure */}
       <section id="figure" className="scroll-mt-20 border-t border-rule bg-stock">
         <div className="mx-auto max-w-6xl px-5 py-16">
-          <Reveal>
+          <Reveal reset>
             <SectionHeading
               numeral="03 — Figure"
               title="The figure, live"
@@ -166,7 +166,7 @@ export default function LandingPage() {
             />
           </Reveal>
           <div className="mt-10">
-            <Reveal>
+            <Reveal reset>
               <FigurePlate
                 number="Fig. 2"
                 caption="Radar of the current input values, scaled per feature to [0, 1]. Use the filter to isolate Mean, Standard Error, or Worst measurements."
@@ -180,7 +180,7 @@ export default function LandingPage() {
 
       {/* Discussion / FAQ */}
       <section id="discussion" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16">
-        <Reveal>
+        <Reveal reset>
           <SectionHeading
             numeral="04 — Discussion"
             title="Frequently asked questions"
@@ -189,7 +189,7 @@ export default function LandingPage() {
         </Reveal>
         <div className="mt-10 grid gap-6 md:grid-cols-2 items-start">
           {FAQ.map((item, i) => (
-            <Reveal key={item.q} delay={(i % 2) * 80}>
+            <Reveal key={item.q} delay={(i % 2) * 80} reset>
               <details className="group border border-rule bg-paper">
                 <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-display text-lg text-ink transition-colors hover:bg-stock md:text-xl">
                   {item.q}
@@ -205,7 +205,7 @@ export default function LandingPage() {
           ))}
         </div>
 
-        <Reveal>
+        <Reveal reset>
           <div className="mt-12 border border-rule-ink bg-stock px-6 py-5 md:flex md:items-center md:justify-between md:gap-8">
             <div>
               <p className="small-notation text-faded tracking-widest">Disclaimer</p>

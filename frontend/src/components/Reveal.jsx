@@ -1,8 +1,8 @@
 import { useReveal } from '../hooks/useReveal'
 
-/** Wraps children in a scroll-reveal element; delay staggers the transition. */
-export default function Reveal({ as: Tag = 'div', delay = 0, className = '', children }) {
-  const { ref, visible } = useReveal()
+/** Wraps children in a scroll-reveal element; delay staggers the transition, reset re-reveals on scroll up. */
+export default function Reveal({ as: Tag = 'div', delay = 0, reset = false, className = '', children }) {
+  const { ref, visible } = useReveal({ reset })
   return (
     <Tag
       ref={ref}

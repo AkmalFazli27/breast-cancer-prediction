@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-/** Reveals an element once when it scrolls into view. */
-export function useReveal() {
+/** Reveals an element as it scrolls into view; with reset, hides it again when it leaves. */
+export function useReveal({ reset = false } = {}) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
 
@@ -14,7 +14,9 @@ export function useReveal() {
     }
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (reset) {
+          setVisible(entries[0].isIntersecting)
+        } else if (entries[0].isIntersecting) {
           setVisible(true)
           observer.disconnect()
         }
@@ -23,7 +25,7 @@ export function useReveal() {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [reset])
 
   return { ref, visible }
 }
