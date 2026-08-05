@@ -6,15 +6,12 @@ import { scaleToUnit } from '../utils/scaling'
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? ''
 const API_TIMEOUT = 10000
 
-// POST /api/v1/predict; sends the 22 features under their exact column names.
 export async function predict(features) {
   const { data } = await axios.post(`${API_BASE}/api/v1/predict`, features, {
     timeout: API_TIMEOUT,
   })
   return data
 }
-
-// Demo model until a backend API is configured. Synthetic; the UI labels it.
 export function predictDemo(features) {
   const weight = Object.fromEntries(
     TOP_FEATURES.map(({ key, importance }) => [key, importance]),
