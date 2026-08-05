@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.dependencies import get_service
-from app.main import app
+from app.main import app, cors_origin_regex
 from tests.fixtures import GOLDEN_BENIGN_A, GOLDEN_MALIGNANT, GOLDEN_SAMPLES
 
 
@@ -92,3 +92,18 @@ def test_predict_internal_error_is_500():
         app.dependency_overrides.clear()
     assert resp.status_code == 500
     assert resp.json() == {"detail": "internal-server-error"}
+
+
+def test_cors_origin_regex_returns_none_when_unset(monkeypatch):
+    monkeypatch.delenv("CORS_ORIGIN_REGEX", raising=False)
+    assert cors_origin_regex() is None
+
+
+def test_cors_origin_regex_returns_regex_when_set(monkeypatch):
+    monkeypatch.setenv("CORS_ORIGIN_REGEX", "https://.*\\.vercel\\.app")
+    assert cors_origin_regex() == "https://.*\\.vercel\\.app"
+
+
+def test_cors_origin_regex_strips_whitespace(monkeypatch):
+    monkeypatch.setenv("CORS_ORIGIN_REGEX", "  https://.*\\.vercel\\.app  ")
+    assert cors_origin_regex() == "https://.*\\.vercel\\.app"

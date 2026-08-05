@@ -17,6 +17,11 @@ def cors_origins() -> list[str]:
     return [origin.strip() for origin in raw.split(",") if origin.strip()]
 
 
+def cors_origin_regex() -> str | None:
+    value = os.environ.get("CORS_ORIGIN_REGEX", "").strip()
+    return value or None
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     get_service().load()
@@ -27,6 +32,7 @@ app = FastAPI(title="Breast Cancer Prediction API", version="0.2.0", lifespan=li
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins(),
+    allow_origin_regex=cors_origin_regex(),
     allow_methods=["*"],
     allow_headers=["*"],
 )
