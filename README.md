@@ -1,197 +1,226 @@
-# 🩺 Breast Cancer Prediction
+# Breast Cancer Prediction
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.23.0+-red.svg)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![FastAPI](https://img.shields.io/badge/FastAPI-REST-009688?logo=fastapi&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange?logo=scikit-learn&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Frontend-000000?logo=vercel&logoColor=white)
+![Render](https://img.shields.io/badge/Render-Backend-46E3B7?logo=render&logoColor=black)
 
-A machine learning web application for predicting whether a breast mass is **Benign** or **Malignant** based on measurements from digitized images of fine needle aspirate (FNA) of breast masses.
+A full-stack machine learning web application that predicts whether a breast tumor is **Benign** or **Malignant** based on digitized FNA (fine needle aspirate) cell measurements. Built as an educational portfolio project showcasing modern frontend development, backend API engineering, and ML deployment — without retraining the model.
 
-🔗 **Live Demo:** [breast-cancer-predictor-project.streamlit.app](https://breast-cancer-predictor-project.streamlit.app/)
+**Live:** [https://oncolens-chi.vercel.app/](https://oncolens-chi.vercel.app/)
 
-## 📋 Table of Contents
+![Landing Page](screenshots/landingpage.png)
 
-- [Overview](#overview)
-- [Dataset](#dataset)
-- [Features](#features)
-- [Model Performance](#model-performance)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Notebooks](#notebooks)
-- [Disclaimer](#disclaimer)
+## Overview
 
-## 🔍 Overview
+Version 2.0 replaces the legacy Streamlit dashboard with a modern architecture:
 
-This project implements a complete machine learning pipeline for breast cancer classification:
+```
+React SPA (Vite) ──axios──▶ FastAPI REST API ──▶ scaler.pkl → model.pkl ──▶ JSON
+     Vercel                       Render                    models/
+```
 
-1. **Data Exploration** - Understanding the dataset characteristics and distributions
-2. **Data Preprocessing** - Handling missing values, feature scaling, and multicollinearity removal
-3. **Model Training** - Training and comparing multiple ML algorithms
-4. **Hyperparameter Tuning** - Optimizing model parameters for best performance
-5. **Web Application** - Interactive Streamlit app for real-time predictions
+- **Frontend** — React 19 + Vite, Tailwind CSS v4, Recharts (radar chart), React Hook Form + Zod (22-field validation)
+- **Backend** — FastAPI + Pydantic, deep ML inference service (scikit-learn, joblib, numpy), CORS env-configured
+- **Model** — Tuned Logistic Regression (no retraining), 22 features selected via VIF multicollinearity removal
+- **Deployment** — Frontend on Vercel, backend on Render (free tier)
 
-## 📊 Dataset
+The ML pipeline (exploration → preprocessing → modeling) is documented in Jupyter notebooks under `notebook/`.
 
-The dataset used is the **Wisconsin Breast Cancer Dataset** containing:
+## Dataset
 
-- **569 samples** of breast mass measurements
-- **30 features** computed from digitized FNA images
-- **2 classes**: Malignant (M) and Benign (B)
+**Wisconsin Breast Cancer Diagnostic Dataset** (UCI)
 
-### Features Include:
-- **Mean values**: radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry, fractal dimension
-- **Standard Error (SE)**: for each of the above measurements
-- **Worst values**: largest mean values for each measurement
+- 569 samples of breast mass measurements
+- 30 raw features computed from digitized FNA images
+- After VIF-based multicollinearity removal: **22 model features**
+- Classes: Malignant (M = 1), Benign (B = 0)
 
-## ✨ Features
+Features include mean, standard error, and worst (largest) values for: radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry, and fractal dimension.
 
-- **Interactive Web Interface**: Streamlit-based dashboard with real-time predictions
-- **Radar Chart Visualization**: Visual representation of cell nuclei measurements
-- **Probability Scores**: Shows confidence levels for both Benign and Malignant predictions
-- **Adjustable Parameters**: Sidebar sliders to modify input measurements
+## Model Performance
 
-## 📈 Model Performance
-
-After extensive evaluation and hyperparameter tuning, **Logistic Regression** was selected as the best model:
+Logistic Regression was selected after comparing 7 algorithms with cross-validation:
 
 | Metric | Score |
-|--------|-------|
-| **Accuracy** | 97.37% |
-| **Precision** | 97.56% |
-| **Recall** | 95.24% |
-| **F1-Score** | 96.39% |
-| **ROC-AUC** | 99.04% |
+|---|---|
+| Accuracy | 97.37% |
+| Precision | 97.56% |
+| Recall | 95.24% |
+| F1-Score | 96.39% |
+| ROC-AUC | 99.04% |
 
-### Model Comparison (Cross-Validation F1-Score)
+**Confusion Matrix** (test set, 114 samples): TN 71 · FP 1 · FN 2 · TP 40
 
-| Model | CV F1-Score |
-|-------|-------------|
-| **Logistic Regression** | 96.33% |
-| SVM | 94.86% |
-| Random Forest | 94.53% |
-| Gradient Boosting | 94.16% |
-| KNN | 93.31% |
-| Naive Bayes | 90.79% |
-| Decision Tree | 89.52% |
+### Top 5 Features by Importance
 
-### Top 5 Important Features
+| Rank | Feature | Importance |
+|---|---|---|
+| 1 | concave points_worst | 19.65% |
+| 2 | area_worst | 17.30% |
+| 3 | concave points_mean | 14.07% |
+| 4 | area_se | 12.82% |
+| 5 | concavity_worst | 8.07% |
 
-1. `concave points_worst` (19.65%)
-2. `area_worst` (17.30%)
-3. `concave points_mean` (14.07%)
-4. `area_se` (12.82%)
-5. `concavity_worst` (8.07%)
+## Tech Stack
 
-## 📁 Project Structure
+| Layer | Technologies |
+|---|---|
+| Frontend | React 19, Vite, Tailwind CSS v4, Recharts, React Hook Form, Zod, Axios, Lucide React |
+| Backend | FastAPI, Pydantic v2, scikit-learn, joblib, numpy, uvicorn, uv |
+| ML/Data | scikit-learn, pandas, numpy, joblib |
+| Deployment | Vercel (frontend), Render (backend), Streamlit Cloud (legacy) |
+
+## Project Structure
 
 ```
 breast-cancer-prediction/
-├── app/
-│   └── main.py              # Streamlit web application
+├── frontend/              # React SPA (Vite)
+│   ├── src/
+│   │   ├── components/    # FeatureInput, FeatureGroup, PredictionCard, RadarChart...
+│   │   ├── pages/         # LandingPage, PredictPage
+│   │   ├── services/      # prediction.js (axios → /api/v1/predict)
+│   │   ├── hooks/         # usePrediction.js
+│   │   ├── constants/     # FEATURE_META, FEATURE_GROUPS, schema
+│   │   └── utils/         # scaling.js (radar normalization)
+│   └── vercel.json        # SPA rewrite for client-side routing
+├── backend/               # FastAPI inference service
+│   ├── app/
+│   │   ├── main.py        # FastAPI app, CORS, lifespan, 500 handler
+│   │   ├── constants.py   # FEATURE_KEYS (22), FEATURE_BOUNDS, LABEL_MAP
+│   │   ├── schemas/       # Pydantic request (generated) / response
+│   │   ├── services/      # InferenceService (deep module: load → predict)
+│   │   ├── routers/       # POST /api/v1/predict, GET /health
+│   │   └── dependencies.py
+│   ├── tests/             # pytest (30 tests: API contract, schema, inference, constants)
+│   ├── requirements.txt   # pinned via uv export
+│   ├── pyproject.toml     # uv-managed deps
+│   └── README.md          # backend-specific run/test instructions
+├── app/                   # Legacy Streamlit app (still live on Streamlit Cloud)
 ├── data/
-│   ├── raw/
-│   │   └── breast_cancer.csv    # Original dataset
-│   └── processed/
-│       ├── final_scaled.csv             # Scaled features
-│       └── removed_multicollinearity.csv # Features after VIF analysis
-├── models/
-│   ├── final_model_logistic_regression.pkl  # Best trained model
-│   ├── final_model_random_forest.pkl
-│   ├── baseline_logistic_regression.pkl
-│   ├── baseline_random_forest.pkl
-│   └── scaler.pkl                           # Feature scaler
-├── notebook/
-│   ├── exploration.ipynb    # Data exploration & visualization
-│   ├── preprocessing.ipynb  # Data cleaning & feature engineering
-│   └── modeling.ipynb       # Model training & evaluation
-├── results/
-│   ├── model_comparison.csv      # All models performance metrics
-│   ├── model_summary.csv         # Best model summary
-│   ├── feature_importance.csv    # Feature importance rankings
-│   ├── confusion_matrix.csv      # Confusion matrix results
-│   ├── cross_validation_scores.csv
-│   ├── tuning_comparison.csv
-│   └── test_predictions.csv
-├── requirements.txt
+│   └── processed/         # removed_multicollinearity.csv (22 features)
+├── models/                # trained artifacts (committed, never retrain)
+│   ├── final_model_logistic_regression.pkl
+│   └── scaler.pkl
+├── notebook/              # Jupyter notebooks (ML pipeline documentation)
+├── results/               # model metrics CSVs
+├── screenshots/           # README images
+├── render.yaml            # Render Blueprint
 └── README.md
 ```
 
-## 🛠️ Installation
+## API
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/breast-cancer-prediction.git
-   cd breast-cancer-prediction
-   ```
+### `POST /api/v1/predict`
 
-2. **Create a virtual environment** (recommended)
-   ```bash
-   python -m venv venv
-   
-   # Windows
-   venv\Scripts\activate
-   
-   # macOS/Linux
-   source venv/bin/activate
-   ```
+Send the 22 model features (exact column names, spaces preserved) as JSON.
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+**Request:**
 
-## 🚀 Usage
-
-### Running the Web Application
-
-```bash
-cd app
-streamlit run main.py
+```json
+{
+  "texture_mean": 14.36,
+  "smoothness_mean": 0.09779,
+  "compactness_mean": 0.08129,
+  "concave points_mean": 0.04781,
+  "symmetry_mean": 0.1885,
+  "fractal_dimension_mean": 0.05766,
+  "texture_se": 0.7886,
+  "area_se": 23.56,
+  "smoothness_se": 0.008462,
+  "compactness_se": 0.0146,
+  "concavity_se": 0.02387,
+  "concave points_se": 0.01315,
+  "symmetry_se": 0.0198,
+  "fractal_dimension_se": 0.0023,
+  "texture_worst": 19.26,
+  "area_worst": 711.2,
+  "smoothness_worst": 0.144,
+  "compactness_worst": 0.1773,
+  "concavity_worst": 0.239,
+  "concave points_worst": 0.1288,
+  "symmetry_worst": 0.2977,
+  "fractal_dimension_worst": 0.07259
+}
 ```
 
-The app will open in your default browser at `http://localhost:8501`
+**Response (200):**
 
-### Using the App
+```json
+{
+  "prediction": "Benign",
+  "probability": { "benign": 93.9, "malignant": 6.1 }
+}
+```
 
-1. Adjust the cell nuclei measurements using the sliders in the sidebar
-2. View the radar chart visualization of your input values
-3. See the prediction result (Benign/Malignant) with probability scores
+**Errors:** 422 (validation: missing/extra/wrong-type/out-of-range field), 500 (internal).
 
-## 📓 Notebooks
+**Example (curl):**
 
-The project includes three Jupyter notebooks documenting the complete ML pipeline:
+```bash
+curl -X POST https://breast-cancer-prediction-api-4dy1.onrender.com/api/v1/predict \
+  -H "Content-Type: application/json" \
+  -d @payload.json
+```
 
-1. **[exploration.ipynb](notebook/exploration.ipynb)** - Exploratory Data Analysis
-   - Data overview and statistics
-   - Distribution analysis
-   - Correlation analysis
-   - Visualization of features
+### `GET /health`
 
-2. **[preprocessing.ipynb](notebook/preprocessing.ipynb)** - Data Preprocessing
-   - Missing value handling
-   - Feature scaling
-   - Multicollinearity removal using VIF
-   - Train-test split
+```json
+{ "status": "ok" }
+```
 
-3. **[modeling.ipynb](notebook/modeling.ipynb)** - Model Development
-   - Baseline model training
-   - Model comparison
-   - Hyperparameter tuning
-   - Final model evaluation
-   - Model persistence
+## Installation & Usage
 
-## ⚙️ Technologies Used
+### Backend
 
-- **Python 3.8+**
-- **Pandas** - Data manipulation
-- **NumPy** - Numerical computing
-- **Scikit-learn** - Machine learning
-- **Matplotlib & Seaborn** - Data visualization
-- **Plotly** - Interactive charts
-- **Streamlit** - Web application
-- **Joblib** - Model serialization
+```powershell
+cd backend
+uv sync                        # install deps into .venv (requires uv)
+uv run uvicorn app.main:app --reload   # http://127.0.0.1:8000
+```
 
-## ⚠️ Disclaimer
+### Frontend
 
-> **This application is intended for educational and informational purposes only.** It should NOT be used as a substitute for professional medical diagnosis, advice, or treatment. Always consult a qualified healthcare provider for proper diagnosis and treatment decisions.
+```powershell
+cd frontend
+npm install                    # once
+npm run dev                    # http://localhost:5173
+```
+
+Frontend reads `VITE_API_BASE_URL` from `frontend/.env` (set to `http://127.0.0.1:8000` for local dev). Without it, the app cannot reach the backend.
+
+### Testing
+
+```powershell
+# Backend (30 pytest tests)
+cd backend && uv run pytest
+
+# Frontend (lint)
+cd frontend && npm run lint
+```
+
+## Deployment
+
+| Service | Platform | URL |
+|---|---|---|
+| Frontend | Vercel | [oncolens-chi.vercel.app](https://oncolens-chi.vercel.app/) |
+| Backend | Render | [breast-cancer-prediction-api-4dy1.onrender.com](https://breast-cancer-prediction-api-4dy1.onrender.com) |
+
+**Notes:**
+- Render free tier spins down after ~15 min idle; first request after cold start takes ~30–60s.
+- Vercel env `VITE_API_BASE_URL` is set to the Render backend URL at build time.
+- Backend CORS: `CORS_ORIGINS` (exact) + `CORS_ORIGIN_REGEX` (`https://.*\.vercel\.app` for preview deployments).
+
+## Notebooks
+
+The ML pipeline is documented in three Jupyter notebooks:
+
+1. **[exploration.ipynb](notebook/exploration.ipynb)** — EDA, distributions, correlations
+2. **[preprocessing.ipynb](notebook/preprocessing.ipynb)** — cleaning, VIF, train-test split
+3. **[modeling.ipynb](notebook/modeling.ipynb)** — training, comparison, tuning, evaluation
+
+## Disclaimer
+
+> This application is for **educational and demonstration purposes only**. It is not a substitute for professional medical diagnosis, advice, or treatment. Always consult a qualified healthcare provider for medical decisions.
