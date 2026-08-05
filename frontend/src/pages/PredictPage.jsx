@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AlertTriangle, Loader2, RotateCcw } from 'lucide-react'
+import { Loader2, RotateCcw } from 'lucide-react'
 import FigurePlate from '../components/FigurePlate'
 import FeatureGroup from '../components/FeatureGroup'
 import RadarFigure from '../components/RadarFigure'
@@ -60,7 +60,7 @@ export default function PredictPage() {
     mode: 'onTouched',
   })
   const { watch, handleSubmit, reset, formState } = methods
-  const { result, loading, error, runPrediction, resetResult, isDemoMode } = usePrediction()
+  const { result, loading, error, runPrediction, resetResult } = usePrediction()
   const [showReset, setShowReset] = useState(false)
 
   const watchedValues = watch()
@@ -92,21 +92,6 @@ export default function PredictPage() {
           so you can run a verdict out of the box.
         </p>
       </div>
-
-      {isDemoMode && (
-        <div
-          role="status"
-          className="mt-6 flex items-start gap-3 border border-faded bg-stock px-4 py-3"
-        >
-          <AlertTriangle className="mt-0.5 size-4 shrink-0 text-faded" strokeWidth={1.75} aria-hidden />
-          <p className="measure text-sm leading-relaxed text-ink-soft">
-            No prediction API configured — running on a <strong>synthetic demo model</strong>{' '}
-            derived from the published feature importances, clearly not the real pipeline.
-            Point <span className="notation">VITE_API_BASE_URL</span> at the FastAPI backend
-            for live inference.
-          </p>
-        </div>
-      )}
 
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -143,7 +128,6 @@ export default function PredictPage() {
               <VerdictPanel
                 state={loading ? 'loading' : error ? 'error' : result ? 'success' : 'idle'}
                 result={result}
-                isDemoMode={isDemoMode}
                 onReset={() => {
                   resetResult()
                   reset(DEFAULT_VALUES)

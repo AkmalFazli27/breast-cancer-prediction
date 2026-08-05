@@ -9,7 +9,7 @@ from app.schemas.predict import PredictResponse
 
 
 class InferenceService:
-    """Loads scaler + model once and exposes predict(features) -> PredictResponse."""
+    # Loads scaler + model once and exposes predict(features) -> PredictResponse.
 
     def __init__(self) -> None:
         self._scaler = None
@@ -17,7 +17,7 @@ class InferenceService:
         self._lock = threading.Lock()
 
     def load(self) -> None:
-        """Idempotent, thread-safe model/scaler load. Fails fast on artifact mismatch."""
+        # Idempotent, thread-safe model/scaler load. Fails fast on artifact mismatch.
         if self._model is not None:
             return
         with self._lock:
