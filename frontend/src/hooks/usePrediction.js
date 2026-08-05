@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { predict, predictDemo, isDemoMode } from '../services/prediction'
+import { predict } from '../services/prediction'
 
 // Prediction hook: wraps the API call with loading, error, and result state.
 export function usePrediction() {
@@ -11,7 +11,7 @@ export function usePrediction() {
     setLoading(true)
     setError(null)
     try {
-      const data = isDemoMode ? await predictDemo(values) : await predict(values)
+      const data = await predict(values)
       setResult(data)
     } catch (err) {
       setResult(null)
@@ -31,5 +31,5 @@ export function usePrediction() {
     setLoading(false)
   }, [])
 
-  return { result, loading, error, runPrediction, resetResult, isDemoMode }
+  return { result, loading, error, runPrediction, resetResult }
 }

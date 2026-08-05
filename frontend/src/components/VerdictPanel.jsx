@@ -9,7 +9,7 @@ const EMPTY_STATE = {
 }
 
 // Verdict panel: idle / loading / error / result states.
-export default function VerdictPanel({ state, result, onReset, isDemoMode = false }) {
+export default function VerdictPanel({ state, result, onReset }) {
   if (state === 'loading') {
     return (
       <div className="flex flex-col items-center gap-3 border border-rule bg-stock px-6 py-14 text-center">
@@ -102,7 +102,7 @@ export default function VerdictPanel({ state, result, onReset, isDemoMode = fals
 
         <div className="mt-6 flex items-center justify-between border-t border-rule pt-4">
           <p className="text-xs text-faded">
-            Logistic regression · scaled features · {isDemoMode ? 'demo' : 'live'} model
+            Logistic regression · scaled features · live model
           </p>
           <button
             type="button"
